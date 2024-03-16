@@ -231,7 +231,7 @@ class board:
             for box in row:
                 for comp_box in pos_lst:
                     if box.pos == comp_box:
-                        
+                        print("placeholder")
                 pos_lst.append(box.pos)
         return self.fill_squares()
 
