@@ -38,7 +38,7 @@ class Test_vert_comp(unittest.TestCase):
                    [square(7),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(8),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()]))
-        solution_board = test_board = board(([square(1),square(),square(),square(),square(),square(),square(),square(),square()],
+        solution_board = board(([square(1),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(2),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(3),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(4),square(),square(),square(),square(),square(),square(),square(),square()],
