@@ -49,7 +49,35 @@ class Test_vert_comp(unittest.TestCase):
                    [square(9),square(),square(),square(),square(),square(),square(),square(),square()]))
         test_board.vert_comp()
         self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
-    
+
+class Test_square_check(unittest.TestCase):
+    """
+    Tests square check function
+    """
+    def test_square_chk_1(self):
+        """
+        Basic test to ensure that vertical comparison can solve based on existing values
+        """
+        test_board = board(([square(1),square(2),square(3),square(),square(),square(),square(),square(),square()],
+                   [square(6),square(5),square(4),square(),square(),square(),square(),square(),square()],
+                   [square(7),square(8),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()]))
+        solution_board = board(([square(1),square(2),square(3),square(),square(),square(),square(),square(),square()],
+                   [square(6),square(5),square(4),square(),square(),square(),square(),square(),square()],
+                   [square(7),square(8),square(9),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()]))
+        test_board.vert_comp()
+        self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
 
 if __name__== '__main__':
     unittest.main()
