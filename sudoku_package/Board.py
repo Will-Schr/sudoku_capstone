@@ -31,6 +31,22 @@ class board:
         for i in self.table:
             row_out.append(i.pos)
         return row_out
+    
+    def test_out_table(self):
+        """
+        Outputs table as a list of lists for testing purposes
+        """
+        row_out = []
+        for i in self.table:
+            if type(i) == list:
+                row_append = []
+                for j in i:
+                    row_append.append(j.pos)
+                row_out.append(row_append)
+            else:
+                row_out.append(i.pos)
+        return row_out
+
 
     def test_unsolved(self):
         """
