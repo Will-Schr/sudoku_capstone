@@ -1,3 +1,4 @@
 misc/__pycache__/
 test/__pycache__/
 sudoku_package/__pycache__/
+test/testfile.py
