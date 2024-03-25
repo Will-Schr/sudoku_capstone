@@ -76,7 +76,7 @@ class Test_square_check(unittest.TestCase):
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()]))
-        test_board.vert_comp()
+        test_board.square_check()
         self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
 
 if __name__== '__main__':
