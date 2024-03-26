@@ -247,8 +247,10 @@ class board:
         """
         for row in self.table:
             nav_lst = list(range(9))
+            while nav_lst and len(row[nav_lst[0]].pos) != 2:
+                nav_lst.pop(0)
             if not nav_lst:
-                break
+                continue
             first_lst = row[nav_lst[0]].pos
             nav_lst.pop(0)
             if (nav_lst == False):
@@ -258,7 +260,7 @@ class board:
                     for j in range(9):
                         if row[j].pos != first_lst:
                             row[j].pos = [g for g in row[j].pos if g not in first_lst]
-                nav_lst.remove(x)
+                # nav_lst.remove(x)
         return self.fill_squares()
 
     def solve(self):
@@ -271,5 +273,6 @@ class board:
             self.vert_comp()
             self.square_check()
             self.num_inst_chk()
+            self.naked_pairs_h() # Issue with medium board 2
 
 #TODO: add hidden matches function https://www.thonky.com/sudoku/hidden-pairs-triples-quads
