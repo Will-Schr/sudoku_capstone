@@ -135,6 +135,30 @@ class Test_Medium_Sudoku(unittest.TestCase):
         medium_board.solve()
         self.assertEqual(medium_board.test_out_table(), solution_board.test_out_table(), "\n\nUnsolved Squares: " + str(medium_board.test_unsolved()))
 
+    def test_medium_board_3(self):
+        """Tests medium sudoku puzzle 3"""
+        medium_board = board(([square(6),square(5),square(),square(),square(3),square(2),square(9),square(),square(4)],
+                   [square(),square(4),square(),square(),square(),square(8),square(),square(),square()],
+                   [square(),square(9),square(1),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(6),square(4),square(),square(),square(),square(1),square(9)],
+                   [square(3),square(),square(),square(),square(),square(),square(),square(8),square()],
+                   [square(),square(7),square(),square(),square(8),square(3),square(),square(),square(2)],
+                   [square(),square(),square(),square(),square(7),square(),square(),square(4),square()],
+                   [square(),square(),square(),square(),square(),square(6),square(1),square(),square()],
+                   [square(),square(1),square(5),square(),square(4),square(),square(6),square(2),square()]))
+
+        solution_board = board(([square(6),square(5),square(8),square(1),square(3),square(2),square(9),square(7),square(4)],
+                   [square(7),square(4),square(3),square(5),square(9),square(8),square(2),square(6),square(1)],
+                   [square(2),square(9),square(1),square(7),square(6),square(4),square(8),square(3),square(5)],
+                   [square(5),square(8),square(6),square(4),square(2),square(7),square(3),square(1),square(9)],
+                   [square(3),square(2),square(4),square(9),square(1),square(5),square(7),square(8),square(6)],
+                   [square(1),square(7),square(9),square(6),square(8),square(3),square(4),square(5),square(2)],
+                   [square(9),square(6),square(2),square(8),square(7),square(1),square(5),square(4),square(3)],
+                   [square(4),square(3),square(7),square(2),square(5),square(6),square(1),square(9),square(8)],
+                   [square(8),square(1),square(5),square(3),square(4),square(9),square(6),square(2),square(7)]))
+        medium_board.solve()
+        self.assertEqual(medium_board.test_out_table(), solution_board.test_out_table(), "\n\nUnsolved Squares: " + str(medium_board.test_unsolved()))
+
 class Test_Hard_Sudoku(unittest.TestCase):
     """Tests multiple hard sudoku puzzles"""
     def test_hard_board_1(self):
