@@ -13,16 +13,6 @@ class board:
             self.table = table_in
         self.solved = False
 
-    # def test_out_full(self):
-    #     """
-    #     Outputs table in 2d list of strings for testing puposes
-    #     """
-    #     test_board_out = [[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]
-    #     for i in range(9):
-    #         for j in range(9):
-    #             test_board_out[i][j] = self.table[i][j].value
-    #     return test_board_out
-
     def test_out_row(self):
         """
         Outputs single row as a list for testing purposes
