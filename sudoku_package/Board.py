@@ -260,7 +260,6 @@ class board:
                     for j in range(9):
                         if row[j].pos != first_lst:
                             row[j].pos = [g for g in row[j].pos if g not in first_lst]
-                # nav_lst.remove(x)
         return self.fill_squares()
 
     def solve(self):
