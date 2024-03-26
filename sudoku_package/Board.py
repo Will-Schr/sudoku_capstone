@@ -245,8 +245,8 @@ class board:
         """
         Searches for naked pairs horizontally
         """
-        nav_lst = list(range(9))
         for row in self.table:
+            nav_lst = list(range(9))
             if not nav_lst:
                 break
             first_lst = row[nav_lst[0]].pos
