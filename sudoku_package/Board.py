@@ -261,6 +261,27 @@ class board:
                         if row[j].pos != first_lst:
                             row[j].pos = [g for g in row[j].pos if g not in first_lst]
         return self.fill_squares()
+    
+    def naked_pairs_v(self):
+        """
+        Searches for naked pairs vertically
+        """
+        for column in range(9):
+            nav_lst = list(range(9))
+            while nav_lst and len(self.table[nav_lst[0]][column].pos) != 2:
+                nav_lst.pop(0)
+            if not nav_lst:
+                continue
+            first_lst = self.table[nav_lst[0]][column].pos
+            nav_lst.pop(0)
+            if (nav_lst == False):
+                continue
+            for x in nav_lst:
+                if (self.table[x][column].pos == first_lst):
+                    for j in range(9):
+                        if self.table[j][column].pos != first_lst:
+                            self.table[j][column].pos = [g for g in self.table[j][column].pos if g not in first_lst]
+        return self.fill_squares()
 
     def solve(self):
         """
@@ -272,6 +293,7 @@ class board:
             self.vert_comp()
             self.square_check()
             self.num_inst_chk()
-            self.naked_pairs_h() # Issue with medium board 2
+            self.naked_pairs_h()
+            self.naked_pairs_v()
 
 #TODO: add hidden matches function https://www.thonky.com/sudoku/hidden-pairs-triples-quads
