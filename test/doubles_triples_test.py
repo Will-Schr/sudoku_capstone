@@ -14,11 +14,28 @@ from sudoku_package.Square import square
 
 class Test_naked_doubles(unittest.TestCase):
     """Tests matches_h finding naked doubles"""
-    def test_naked_double_1(self):
+    def test_naked_double_horizontal(self):
         """Test 1 of naked double"""
-        test_row = board([square(pos_in=[1,2]), square(pos_in=[1,2]), square(pos_in=[1,3]), square(pos_in=[2,5])])
-        solution_row = board([square(pos_in=[1,2]), square(pos_in=[1,2]), square(pos_in=[1]), square(pos_in=[5])])
-        self.assertEqual(test_row.test_out_row(),solution_row.test_out_row())
+        test_board = board(([square(pos_in=[1,2]),square(pos_in=[1,2]),square(8),square(pos_in=[2,4]),square(pos_in=[2,3]),square(pos_in=[1,5]),square(9),square(6),square(7)],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()]))
+        solution_board = board(([square(pos_in=[1,2]),square(pos_in=[1,2]),square(8),square(4),square(3),square(5),square(9),square(6),square(7)],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()]))
+        test_board.naked_pairs_h()
+        self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
 
     def test_naked_double_2(self):
         """Test 2 of naked double"""
