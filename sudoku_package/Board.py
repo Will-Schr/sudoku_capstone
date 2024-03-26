@@ -13,15 +13,15 @@ class board:
             self.table = table_in
         self.solved = False
 
-    def test_out_full(self):
-        """
-        Outputs table in 2d list of strings for testing puposes
-        """
-        test_board_out = [[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]
-        for i in range(9):
-            for j in range(9):
-                test_board_out[i][j] = self.table[i][j].value
-        return test_board_out
+    # def test_out_full(self):
+    #     """
+    #     Outputs table in 2d list of strings for testing puposes
+    #     """
+    #     test_board_out = [[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]
+    #     for i in range(9):
+    #         for j in range(9):
+    #             test_board_out[i][j] = self.table[i][j].value
+    #     return test_board_out
 
     def test_out_row(self):
         """
@@ -41,10 +41,10 @@ class board:
             if type(i) == list:
                 row_append = []
                 for j in i:
-                    row_append.append(j.pos)
+                    row_append.append([j.pos,j.value])
                 row_out.append(row_append)
             else:
-                row_out.append(i.pos)
+                row_out.append([i.pos,i.value])
         return row_out
 
 
@@ -249,6 +249,26 @@ class board:
                     if box.pos == comp_box:
                         print("placeholder")
                 pos_lst.append(box.pos)
+        return self.fill_squares()
+
+    def naked_pairs_h(self):
+        """
+        Searches for naked pairs horizontally
+        """
+        nav_lst = list(range(9))
+        for row in self.table:
+            if not nav_lst:
+                break
+            first_lst = row[nav_lst[0]].pos
+            nav_lst.pop(0)
+            if (nav_lst == False):
+                continue
+            for x in nav_lst:
+                if (row[x].pos == first_lst):
+                    for j in range(9):
+                        if row[j].pos != first_lst:
+                            row[j].pos = [g for g in row[j].pos if g not in first_lst]
+                nav_lst.remove(x)
         return self.fill_squares()
 
     def solve(self):
