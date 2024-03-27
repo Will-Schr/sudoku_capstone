@@ -351,5 +351,4 @@ class board:
             self.naked_pairs_h()
             self.naked_pairs_v()
             self.hidden_pairs_h()
-
 #TODO: add hidden matches function https://www.thonky.com/sudoku/hidden-pairs-triples-quads
