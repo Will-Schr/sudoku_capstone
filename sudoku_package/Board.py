@@ -21,14 +21,14 @@ class board:
         for i in self.table:
             row_out.append(i.pos)
         return row_out
-    
+
     def test_out_table(self):
         """
         Outputs table as a list of lists for testing purposes
         """
         row_out = []
         for i in self.table:
-            if type(i) == list:
+            if isinstance(i,list):
                 row_append = []
                 for j in i:
                     row_append.append([j.pos,j.value])
@@ -118,6 +118,8 @@ class board:
                 if len(j.pos) == 1: #if there is only one item in list
                     j.set_val(j.pos[0])
                     change = True
+        if change:
+            self.basic_scans()
         return change
 
     def hor_comp(self):
@@ -224,6 +226,15 @@ class board:
                         self.table[input_h][input_v].set_val(num_check)
         return self.fill_squares()
 
+    def basic_scans(self):
+        """
+        Function to perform basic sudoku scans
+        """
+        self.hor_comp()
+        self.vert_comp()
+        self.num_inst_chk()
+        self.square_check()
+    
     #TODO: add function for checking that all squares are correct
 
     def matches_h(self): # In progress https://www.thonky.com/sudoku/naked-pairs-triples-quads
@@ -283,17 +294,59 @@ class board:
                             self.table[j][column].pos = [g for g in self.table[j][column].pos if g not in first_lst]
         return self.fill_squares()
 
+    def hidden_pairs_h(self): # TODO: manage seemingly hidden pairs like [3,4,7] and [3,4,7]
+        for row in self.table:
+            all_unplaced = []
+            unplaced = []
+            # Create list of all unplaced values in the row
+            for box in row:
+                for val in box.pos:            
+                    all_unplaced.append(val)
+            # Create list of all unplaced values that only occur twice
+            for u_val in all_unplaced:
+                if u_val not in unplaced and all_unplaced.count(u_val) == 2:
+                    unplaced.append(u_val)
+            for box in row:
+                # These nested for loops generate every possible pair from the unplaced list
+                for first in range(len(unplaced)-1):
+                    for second in range(first + 1,len(unplaced)):
+                        first_val = unplaced[first]
+                        second_val = unplaced[second]
+                        count = 0
+                        if first_val in box.pos and second_val in box.pos:
+                            # This for loop is used to go through every box and check if there is any other boxes with the hidden pair,
+                            # as well as ensure that the pair is exclusive
+                            for box_chk in row:
+                                if first_val in box_chk.pos or second_val in box_chk.pos:
+                                    if first_val in box_chk.pos and second_val in box_chk.pos:
+                                        count += 1
+                                        if count > 2:
+                                            count = 0
+                                            break
+                                    else:
+                                        count = 0
+                                        break
+                            if count == 2:
+                                # TODO: Consider replacing with indicies to prevent extra cycles/nested looping
+                                for box_rep in row:
+                                    if first_val in box_rep.pos and second_val in box_rep.pos:
+                                        # Ordering here isn't necessary, but keeps the pos lists much more clean
+                                        if first_val < second_val:
+                                            box_rep.pos = [first_val,second_val]
+                                        else:
+                                            box_rep.pos = [second_val,first_val]
+        self.print_table()
+        return self.fill_squares()
+
     def solve(self):
         """
         Solves board using combination of functions
         """
         #TODO: Implement scan funtions into one solve function
         for _ in range(100):
-            self.hor_comp()
-            self.vert_comp()
-            self.square_check()
-            self.num_inst_chk()
+            self.basic_scans()
             self.naked_pairs_h()
             self.naked_pairs_v()
+            self.hidden_pairs_h()
 
 #TODO: add hidden matches function https://www.thonky.com/sudoku/hidden-pairs-triples-quads
