@@ -28,6 +28,41 @@ class board:
                 row_out.append([i.pos,i.value])
         return row_out
 
+    def test_valid(self):
+        """
+        Returns if the board is valid, i.e. doesn't have multiple combinations of a number within it
+        """
+        # Iterates horizontally
+        for row in self.table:
+            row_lst = []
+            for box in row:
+                if box.value == "?":
+                    continue
+                if box in row_lst:
+                    return False
+                row_lst.append(box.value)
+        # Iterates vertically
+        for column_idx in range(9):
+            column_lst = []
+            for i in self.table:
+                if i[column_idx] == "?":
+                    continue
+                if i[column_idx].value in row_lst:
+                    return False
+                column_lst.append(i[column_idx].value)
+        # Iterates in squares
+        hor_index = vert_index = [0,3,6]
+        for h_start in hor_index:
+            for v_start in vert_index:
+                square_lst = []
+                for x in range(3):
+                    for y in range (3):
+                        if self.table[h_start + x][v_start + y].value == 0:
+                            continue
+                        if self.table[h_start + x][v_start + y].value in square_lst:
+                            return False
+                        square_lst.append(self.table[h_start + x][v_start + y].value)
+        return True
 
     def test_unsolved(self):
         """
