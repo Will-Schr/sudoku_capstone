@@ -1,7 +1,6 @@
 """
 Contains square class
 """
-
 class square:
     """
     Individual sudoku square
