@@ -1,4 +1,8 @@
 import tkinter as tk
+import sys
+sys.path.append(".")
+from sudoku_package.Board import board 
+from sudoku_package.Square import square
 
 class SudokuBoardGUI:
     """
@@ -31,7 +35,16 @@ class SudokuBoardGUI:
         self.canvas.bind('<Button-1>', self.mouse_click)
 
         #This creates the puzzle/board.
-        self.puzzle = [[0 for _ in range(9)] for _ in range(9)]
+        self.sudBoard = board(([square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()]))
+
         #This is for the highlighted cell
         self.highlight_cell = None
 
@@ -54,7 +67,7 @@ class SudokuBoardGUI:
         self.canvas.delete('numbers')
         for i in range(9):
             for j in range(9):
-                num = self.puzzle[i][j]
+                num = self.sudBoard.table[i][j].value
                 if num != 0:
                     self.canvas.create_text(j * 50 + 25, i * 50 + 25, text=num, tags='numbers')
     
@@ -72,13 +85,13 @@ class SudokuBoardGUI:
     def input_number(self, event):
         if '1' <= event.char <= '9':
             number = int(event.char) #conversion necessary
-            self.puzzle[self.current_row][self.current_col] = number
+            self.sudBoard.table[self.current_row][self.current_col].set_val(number)
             self.draw_numbers()
 
     #Functionality for deleting a number
-    def delete_number(self, event):
-        if self.puzzle[self.current_row][self.current_col] != 0:
-            self.puzzle[self.current_row][self.current_col] = 0
+    def delete_number(self,event):
+        if self.sudBoard.table[self.current_row][self.current_col].value:
+            self.sudBoard.table[self.current_row][self.current_col] = square()
             self.draw_numbers()
             self.canvas.focus_set()
 
@@ -92,11 +105,22 @@ class SudokuBoardGUI:
 
     # clear board functionality and solve Sudoku (YET TO BE ADDED)
     def clear_board(self):
-        self.puzzle = [[0 for _ in range(9)] for _ in range(9)]
+        self.sudBoard = board(([square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()]))
         self.draw_numbers()
 
     def solve_sudoku(self):
-        pass  # Placeholder for future functionality
+        self.sudBoard.solve()        
+        self.sudBoard.print_table()
+        self.draw_numbers()
+        return 
 
 def main():
     root = tk.Tk()
