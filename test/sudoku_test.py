@@ -1,6 +1,5 @@
 # pylint: disable=wrong-import-position, no-member
 # I have no clue why pylint is throwing no-member error
-#TODO: find more elegant fix to the sys path append bs
 """
 Tests accuracy of full sudoku solving functionality
 """
@@ -60,7 +59,7 @@ class Test_Easy_Sudoku(unittest.TestCase):
                    [square(7),square(5),square(3),square(6),square(9),square(1),square(2),square(8),square(4)]))
         easy_board.solve()
         self.assertEqual(easy_board.test_out_table(), solution_board.test_out_table(), "\n\nUnsolved Squares: " + str(easy_board.test_unsolved()))
-    
+
     def test_easy_board_3(self):
         """Tests easy sudoku puzzle 3"""
         easy_board = board(([square(),square(),square(),square(7),square(),square(),square(5),square(),square()],

@@ -1,6 +1,5 @@
 # pylint: disable=wrong-import-position, no-member, unexpected-keyword-arg
 # I have no clue why pylint is throwing the second error
-#TODO: find more elegant fix to the sys path append bs
 """
 Tests accuracy of basic scan functions of the board class
 """
@@ -48,6 +47,7 @@ class Test_vert_comp(unittest.TestCase):
                    [square(8),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(9),square(),square(),square(),square(),square(),square(),square(),square()]))
         test_board.vert_comp()
+        solution_board.basic_scans()
         self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
 
 class Test_square_check(unittest.TestCase):
@@ -77,6 +77,7 @@ class Test_square_check(unittest.TestCase):
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()]))
         test_board.square_check()
+        solution_board.basic_scans()
         self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
 
 if __name__== '__main__':

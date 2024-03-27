@@ -1,6 +1,5 @@
 # pylint: disable=wrong-import-position, no-member, unexpected-keyword-arg
 # I have no clue why pylint is throwing the second error
-#TODO: find more elegant fix to the sys path append bs
 """
 Tests accuracy of matches_h function of the board class
 """
@@ -37,8 +36,9 @@ class Test_naked_doubles(unittest.TestCase):
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()]))
         test_board.naked_pairs_h()
+        solution_board.basic_scans()
         self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
-    
+
     def test_naked_double_horizontal_2(self):
         """
         Test 2 of naked double horizontal scan; tests last row
@@ -62,6 +62,7 @@ class Test_naked_doubles(unittest.TestCase):
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(pos_in=[1,2]),square(pos_in=[1,2]),square(8),square(4),square(3),square(5),square(9),square(6),square(7)]))
         test_board.naked_pairs_h()
+        solution_board.basic_scans()
         self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
 
     def test_naked_double_horizontal_3(self):
@@ -87,8 +88,9 @@ class Test_naked_doubles(unittest.TestCase):
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(pos_in=[1,2,3]),square(pos_in=[1,2,3]),square(pos_in=[8,9]),square(pos_in=[2,4]),square(pos_in=[2,3]),square(pos_in=[1,5]),square(pos_in=[8,9]),square(6),square(7)]))
         test_board.naked_pairs_h()
+        solution_board.basic_scans()
         self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
-    
+
     def test_naked_double_vertical(self):
         """
         Test 1 of naked double vertical scan; tests first column
@@ -112,6 +114,7 @@ class Test_naked_doubles(unittest.TestCase):
                    [square(6),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(7),square(),square(),square(),square(),square(),square(),square(),square()]))
         test_board.naked_pairs_v()
+        solution_board.basic_scans()
         self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
 
     def test_naked_double_vertical_2(self):
@@ -137,6 +140,7 @@ class Test_naked_doubles(unittest.TestCase):
                    [square(),square(),square(),square(),square(),square(),square(),square(),square(6)],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square(7)]))
         test_board.naked_pairs_v()
+        solution_board.basic_scans()
         self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
 
     def test_naked_double_vertical_3(self):
@@ -162,6 +166,7 @@ class Test_naked_doubles(unittest.TestCase):
                    [square(6),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(7),square(),square(),square(),square(),square(),square(),square(),square()]))
         test_board.naked_pairs_v()
+        solution_board.basic_scans()
         self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
 
 class Test_hidden_doubles(unittest.TestCase):
