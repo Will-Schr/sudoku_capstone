@@ -45,9 +45,9 @@ class board:
         for column_idx in range(9):
             column_lst = []
             for i in self.table:
-                if i[column_idx] == "?":
+                if not i[column_idx].value:
                     continue
-                if i[column_idx].value in row_lst:
+                if i[column_idx].value in column_lst:
                     return False
                 column_lst.append(i[column_idx].value)
         # Iterates in squares
