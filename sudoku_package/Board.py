@@ -13,15 +13,6 @@ class board:
             self.table = table_in
         self.solved = False
 
-    def test_out_row(self):
-        """
-        Outputs single row as a list for testing purposes
-        """
-        row_out = []
-        for i in self.table:
-            row_out.append(i.pos)
-        return row_out
-
     def test_out_table(self):
         """
         Outputs table as a list of lists for testing purposes
@@ -294,7 +285,7 @@ class board:
                             self.table[j][column].pos = [g for g in self.table[j][column].pos if g not in first_lst]
         return self.fill_squares()
 
-    def hidden_pairs_h(self): # TODO: manage seemingly hidden pairs like [3,4,7] and [3,4,7]
+    def hidden_pairs_h(self): #TODO: manage seemingly hidden pairs like [3,4,7] and [3,4,7]
         """
         Finds hidden pairs and adjusts pos values accordingly
         """
@@ -345,7 +336,6 @@ class board:
         """
         Solves board using combination of functions
         """
-        #TODO: Implement scan funtions into one solve function
         for _ in range(100):
             self.basic_scans()
             self.naked_pairs_h()
