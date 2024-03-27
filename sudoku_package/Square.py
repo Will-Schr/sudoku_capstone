@@ -24,7 +24,5 @@ class square:
 
     def set_val (self, val_in):
         """Sets value of square"""
-        if self.value:
-            print("oh no") #TODO: Replace with actual error
         self.pos = []
         self.value = val_in
