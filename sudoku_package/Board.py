@@ -1,4 +1,4 @@
-# pylint: disable=no-member
+# pylint: disable=no-member,too-many-branches,too-many-nested-blocks
 """
 Module that contains the board class
 """
@@ -234,7 +234,7 @@ class board:
         self.vert_comp()
         self.num_inst_chk()
         self.square_check()
-    
+
     #TODO: add function for checking that all squares are correct
 
     def matches_h(self): # In progress https://www.thonky.com/sudoku/naked-pairs-triples-quads
@@ -264,15 +264,15 @@ class board:
                 continue
             first_lst = row[nav_lst[0]].pos
             nav_lst.pop(0)
-            if (nav_lst == False):
+            if not nav_lst:
                 continue
             for x in nav_lst:
-                if (row[x].pos == first_lst):
+                if row[x].pos == first_lst:
                     for j in range(9):
                         if row[j].pos != first_lst:
                             row[j].pos = [g for g in row[j].pos if g not in first_lst]
         return self.fill_squares()
-    
+
     def naked_pairs_v(self):
         """
         Searches for naked pairs vertically
@@ -285,22 +285,25 @@ class board:
                 continue
             first_lst = self.table[nav_lst[0]][column].pos
             nav_lst.pop(0)
-            if (nav_lst == False):
+            if not nav_lst:
                 continue
             for x in nav_lst:
-                if (self.table[x][column].pos == first_lst):
+                if self.table[x][column].pos == first_lst:
                     for j in range(9):
                         if self.table[j][column].pos != first_lst:
                             self.table[j][column].pos = [g for g in self.table[j][column].pos if g not in first_lst]
         return self.fill_squares()
 
     def hidden_pairs_h(self): # TODO: manage seemingly hidden pairs like [3,4,7] and [3,4,7]
+        """
+        Finds hidden pairs and adjusts pos values accordingly
+        """
         for row in self.table:
             all_unplaced = []
             unplaced = []
             # Create list of all unplaced values in the row
             for box in row:
-                for val in box.pos:            
+                for val in box.pos:
                     all_unplaced.append(val)
             # Create list of all unplaced values that only occur twice
             for u_val in all_unplaced:
