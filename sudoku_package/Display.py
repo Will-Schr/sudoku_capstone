@@ -1,3 +1,7 @@
+# pylint: disable=wrong-import-position
+"""
+Module holding the sudoku GUI class
+"""
 import tkinter as tk
 import sys
 sys.path.append(".")
@@ -59,25 +63,30 @@ class SudokuBoardGUI:
         self.solve_button = tk.Button(master, text="Solve", command=self.solve_sudoku)
         self.solve_button.pack()
 
-    #Function that creates a grid on the canvas.
     def draw_grid(self):
+        """
+        Function that creates a grid on the canvas
+        """
         for i in range(10):
             width = 2 if i % 3 == 0 else 1
             self.canvas.create_line(i * 50, 0, i * 50, 450, width=width)
             self.canvas.create_line(0, i * 50, 450, i * 50, width=width)
 
-    #Functionality for displaying the numbers in the cell.
     def draw_numbers(self):
+        """
+        Functionality for displaying the numbers in the cell
+        """
         self.canvas.delete('numbers')
         for i in range(9):
             for j in range(9):
                 num = self.sudBoard.table[i][j].value
                 if num != 0:
                     self.canvas.create_text(j * 50 + 25, i * 50 + 25, text=num, tags='numbers')
-    
-        
-    #functionality for mouse click
+
     def mouse_click(self, event):
+        """
+        Functionality for mouse click
+        """
         col = event.x // 50
         row = event.y // 50
         if 0 <= row < 9 and 0 <= col < 9:
@@ -86,53 +95,73 @@ class SudokuBoardGUI:
             self.draw_highlight()
 
     def move_left(self, event):
+        """
+        Functionality for moving highlighted square to the left
+        """
         if self.current_col > 0:
             self.current_col -= 1
             self.draw_highlight()
             self.canvas.focus_set()
 
     def move_right(self, event):
+        """
+        Functionality for moving highlighted square to the right
+        """
         if self.current_col < 8:
             self.current_col += 1
             self.draw_highlight()
             self.canvas.focus_set()
 
     def move_up(self, event):
+        """
+        Functionality for moving highlighted square up
+        """
         if self.current_row > 0:
             self.current_row -= 1
             self.draw_highlight()
             self.canvas.focus_set()
 
     def move_down(self, event):
+        """
+        Functionality for moving highlighted square down
+        """
         if self.current_row < 8:
             self.current_row += 1
             self.draw_highlight()
             self.canvas.focus_set()
 
-    #Functionality for inputting a number and ONLY a number
     def input_number(self, event):
+        """
+        Functionality for inputting a number and ONLY a number
+        """
         if '1' <= event.char <= '9':
             number = int(event.char) #conversion necessary
             self.sudBoard.table[self.current_row][self.current_col].set_val(number)
             self.draw_numbers()
 
-    #Functionality for deleting a number
     def delete_number(self,event):
+        """
+        Functionality for deleting a number
+        """
         if self.sudBoard.table[self.current_row][self.current_col].value:
             self.sudBoard.table[self.current_row][self.current_col] = square()
             self.draw_numbers()
             self.canvas.focus_set()
 
-    #Functionality for creating the highlight border 
     def draw_highlight(self):
+        """
+        Functionality for creating the highlight border
+        """
         if self.highlight_cell:
             self.canvas.delete(self.highlight_cell)
         x0, y0 = self.current_col * 50, self.current_row * 50
         x1, y1 = x0 + 50, y0 + 50
         self.highlight_cell = self.canvas.create_rectangle(x0, y0, x1, y1, outline="blue", width=2)
 
-    # clear board functionality and solve Sudoku
     def clear_board(self):
+        """
+        Function to initiate clearing the board
+        """
         self.sudBoard = board(([square(),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
@@ -145,12 +174,17 @@ class SudokuBoardGUI:
         self.draw_numbers()
 
     def solve_sudoku(self):
-        self.sudBoard.solve()        
+        """
+        Function to initiate solve within board class
+        """
+        self.sudBoard.solve()
         self.sudBoard.print_table()
         self.draw_numbers()
-        return 
 
 def main():
+    """
+    main for testing purposes
+    """
     root = tk.Tk()
     root.title("Sudoku")
     SudokuBoardGUI(root)
@@ -158,4 +192,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
