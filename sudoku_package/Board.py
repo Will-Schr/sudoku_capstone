@@ -21,6 +21,20 @@ class board:
             self.table = table_in
         self.solved = False
 
+    def clear_board(self):
+        """
+        Clears all cells within board
+        """
+        self.table = [[square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()]]
+
     def test_out_table(self):
         """
         Outputs table as a list of lists for testing purposes
