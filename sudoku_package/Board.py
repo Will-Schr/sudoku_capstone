@@ -8,7 +8,15 @@ class board:
     """Class that holds and modifies sudoku table"""
     def __init__(self, table_in = None):
         if table_in is None:
-            self.table = [[],[],[],[],[],[],[],[],[]]
+            self.table = [[square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()]]
         else:
             self.table = table_in
         self.solved = False
