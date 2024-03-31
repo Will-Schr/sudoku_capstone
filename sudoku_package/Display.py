@@ -33,6 +33,10 @@ class SudokuBoardGUI:
         master.bind('<Key>', self.input_number)
         master.bind('<BackSpace>', self.delete_number)
         self.canvas.bind('<Button-1>', self.mouse_click)
+        master.bind('<Left>', self.move_left)
+        master.bind('<Right>', self.move_right)
+        master.bind('<Up>', self.move_up)
+        master.bind('<Down>', self.move_down)
 
         #This creates the puzzle/board.
         self.sudBoard = board(([square(),square(),square(),square(),square(),square(),square(),square(),square()],
@@ -81,6 +85,30 @@ class SudokuBoardGUI:
             self.current_col = col
             self.draw_highlight()
 
+    def move_left(self, event):
+        if self.current_col > 0:
+            self.current_col -= 1
+            self.draw_highlight()
+            self.canvas.focus_set()
+
+    def move_right(self, event):
+        if self.current_col < 8:
+            self.current_col += 1
+            self.draw_highlight()
+            self.canvas.focus_set()
+
+    def move_up(self, event):
+        if self.current_row > 0:
+            self.current_row -= 1
+            self.draw_highlight()
+            self.canvas.focus_set()
+
+    def move_down(self, event):
+        if self.current_row < 8:
+            self.current_row += 1
+            self.draw_highlight()
+            self.canvas.focus_set()
+
     #Functionality for inputting a number and ONLY a number
     def input_number(self, event):
         if '1' <= event.char <= '9':
@@ -103,7 +131,7 @@ class SudokuBoardGUI:
         x1, y1 = x0 + 50, y0 + 50
         self.highlight_cell = self.canvas.create_rectangle(x0, y0, x1, y1, outline="blue", width=2)
 
-    # clear board functionality and solve Sudoku (YET TO BE ADDED)
+    # clear board functionality and solve Sudoku
     def clear_board(self):
         self.sudBoard = board(([square(),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
