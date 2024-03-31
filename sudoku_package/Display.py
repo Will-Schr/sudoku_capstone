@@ -1,4 +1,4 @@
-# pylint: disable=wrong-import-position
+# pylint: disable=wrong-import-position, too-many-instance-attributes
 """
 Module holding the sudoku GUI class
 """
