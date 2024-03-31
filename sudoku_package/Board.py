@@ -50,7 +50,7 @@ class board:
                 row_out.append([i.pos,i.value])
         return row_out
 
-    def test_valid(self):
+    def is_valid(self):
         """
         Returns if the board is valid, i.e. doesn't have multiple combinations of a number within it
         """
