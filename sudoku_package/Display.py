@@ -5,7 +5,7 @@ Module holding the sudoku GUI class
 import tkinter as tk
 import sys
 sys.path.append(".")
-from sudoku_package.Board import board 
+from sudoku_package.Board import board
 from sudoku_package.Square import square
 
 class SudokuBoardGUI:
@@ -21,7 +21,7 @@ class SudokuBoardGUI:
     8. Highlight cell method
     """
     #Function to initialize the board
-    def __init__(self, master):
+    def __init__(self, master, board_in):
         #First, we want to initialize our board, columns, rows, and canvas.
         self.master = master
         self.current_row, self.current_col = 0, 0
@@ -43,15 +43,7 @@ class SudokuBoardGUI:
         master.bind('<Down>', self.move_down)
 
         #This creates the puzzle/board.
-        self.sudBoard = board(([square(),square(),square(),square(),square(),square(),square(),square(),square()],
-                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
-                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
-                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
-                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
-                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
-                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
-                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
-                   [square(),square(),square(),square(),square(),square(),square(),square(),square()]))
+        self.sudBoard = board_in
 
         #This is for the highlighted cell
         self.highlight_cell = None
@@ -187,7 +179,8 @@ def main():
     """
     root = tk.Tk()
     root.title("Sudoku")
-    SudokuBoardGUI(root)
+    test_board = board()
+    SudokuBoardGUI(root,test_board)
     root.mainloop()
 
 if __name__ == "__main__":
