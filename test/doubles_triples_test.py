@@ -1,7 +1,7 @@
 # pylint: disable=wrong-import-position, no-member, unexpected-keyword-arg
 # I have no clue why pylint is throwing the second error
 """
-Tests accuracy of matches_h function of the board class
+Tests accuracy of hidden and naked functions of the board class
 """
 import unittest
 import sys
@@ -166,6 +166,84 @@ class Test_naked_doubles(unittest.TestCase):
                    [square(6),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(7),square(),square(),square(),square(),square(),square(),square(),square()]))
         test_board.naked_pairs_v()
+        solution_board.basic_scans()
+        self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
+
+    def test_naked_double_square(self):
+        """
+        Test 1 of naked double vertical scan; tests first square
+        """
+        test_board = board(([square(pos_in=[1,2,3]),square(pos_in=[1,2,3]),square(pos_in=[8,9]),square(),square(),square(),square(),square(),square()],
+                [square(pos_in=[2,4]),square(pos_in=[2,3]),square(pos_in=[1,5]),square(),square(),square(),square(),square(),square()],
+                [square(pos_in=[8,9]),square(pos_in=[6,8,9]),square(7),square(),square(),square(),square(),square(),square()],
+                [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                [square(),square(),square(),square(),square(),square(),square(),square(),square()]))
+        solution_board = board(([square(pos_in=[1,2,3]),square(pos_in=[1,2,3]),square(pos_in=[8,9]),square(),square(),square(),square(),square(),square()],
+                [square(pos_in=[2,4]),square(pos_in=[2,3]),square(pos_in=[1,5]),square(),square(),square(),square(),square(),square()],
+                [square(pos_in=[8,9]),square(6),square(7),square(),square(),square(),square(),square(),square()],
+                [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                [square(),square(),square(),square(),square(),square(),square(),square(),square()]))
+        test_board.naked_pairs_s()
+        solution_board.basic_scans()
+        self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
+
+    def test_naked_double_square_2(self):
+        """
+        Test 2 of naked double square scan; tests last square
+        """
+        test_board = board(([square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                [square(),square(),square(),square(),square(),square(),square(pos_in=[1,2,3]),square(pos_in=[1,2,3]),square(pos_in=[8,9])],
+                [square(),square(),square(),square(),square(),square(),square(pos_in=[2,4]),square(pos_in=[2,3]),square(pos_in=[1,5])],
+                [square(),square(),square(),square(),square(),square(),square(pos_in=[8,9]),square(pos_in=[6,8,9]),square(7)]))
+        solution_board = board(([square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                [square(),square(),square(),square(),square(),square(),square(pos_in=[1,2,3]),square(pos_in=[1,2,3]),square(pos_in=[8,9])],
+                [square(),square(),square(),square(),square(),square(),square(pos_in=[2,4]),square(pos_in=[2,3]),square(pos_in=[1,5])],
+                [square(),square(),square(),square(),square(),square(),square(pos_in=[8,9]),square(6),square(7)]))
+        test_board.naked_pairs_s()
+        solution_board.basic_scans()
+        self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
+
+    def test_naked_double_square_3(self):
+        """
+        Test 3 of naked double square scan; tests to ensure only doubles are found
+        """
+        test_board = board(([square(pos_in=[1,2,3]),square(pos_in=[1,2,3]),square(pos_in=[8,9]),square(),square(),square(),square(),square(),square()],
+                   [square(pos_in=[2,4]),square(pos_in=[2,3]),square(pos_in=[1,5]),square(),square(),square(),square(),square(),square()],
+                   [square(pos_in=[8,9]),square(pos_in=[6,8,9]),square(7),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()]))
+        solution_board = board(([square(pos_in=[1,2,3]),square(pos_in=[1,2,3]),square(pos_in=[8,9]),square(),square(),square(),square(),square(),square()],
+                   [square(pos_in=[2,4]),square(pos_in=[2,3]),square(pos_in=[1,5]),square(),square(),square(),square(),square(),square()],
+                   [square(pos_in=[8,9]),square(6),square(7),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()]))
+        test_board.naked_pairs_s()
         solution_board.basic_scans()
         self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
 

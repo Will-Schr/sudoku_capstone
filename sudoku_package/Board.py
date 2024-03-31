@@ -320,6 +320,37 @@ class board:
                             self.table[j][column].pos = [g for g in self.table[j][column].pos if g not in first_lst]
         return self.fill_squares()
 
+    def naked_pairs_s(self):
+        """
+        Searches for naked pairs in square scans
+        """
+        hor_index = vert_index = [0,3,6]
+        for h_start in hor_index:
+            for v_start in vert_index:
+                # Create nav list for scanning in square order
+                nav_lst = []
+                for x in range(3):
+                    for y in range(3):
+                        nav_lst.append((h_start + x,v_start + y))
+                # Iterates through square pattern to check nav_lst for possible naked pairs
+                while nav_lst and len(self.table[nav_lst[0][0]][nav_lst[0][1]].pos) != 2:
+                    nav_lst.pop(0)
+                if not nav_lst:
+                    continue
+                first_lst = self.table[nav_lst[0][0]][nav_lst[0][1]].pos
+                nav_lst.pop(0)
+                if not nav_lst:
+                    continue
+                # Checks if possible naked pair exists in subsquare
+                for pair in nav_lst:
+                    if self.table[pair[0]][pair[1]].pos == first_lst: # Determines that naked pair exists
+                        for x2 in range(3):
+                            for y2 in range(3):
+                                # Removes pair values in cells that are not the naked pair
+                                if self.table[h_start+x2][v_start+y2].pos != first_lst:
+                                    self.table[h_start+x2][v_start+y2].pos = [g for g in self.table[h_start+x2][v_start+y2].pos if g not in first_lst]
+        return self.fill_squares()
+
     def hidden_pairs_h(self): #TODO: manage seemingly hidden pairs like [3,4,7] and [3,4,7]
         """
         Finds hidden pairs and adjusts pos values accordingly
@@ -364,7 +395,6 @@ class board:
                                             box_rep.pos = [first_val,second_val]
                                         else:
                                             box_rep.pos = [second_val,first_val]
-        self.print_table()
         return self.fill_squares()
 
     def solve(self):
@@ -375,5 +405,6 @@ class board:
             self.basic_scans()
             self.naked_pairs_h()
             self.naked_pairs_v()
+            self.naked_pairs_s()
             self.hidden_pairs_h()
 #TODO: add hidden matches function https://www.thonky.com/sudoku/hidden-pairs-triples-quads
