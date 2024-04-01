@@ -328,19 +328,20 @@ class board:
         """
         for column in range(9):
             nav_lst = list(range(9))
-            while nav_lst and len(self.table[nav_lst[0]][column].pos) != 2:
+            while nav_lst:
+                while nav_lst and len(self.table[nav_lst[0]][column].pos) != 2:
+                    nav_lst.pop(0)
+                if not nav_lst:
+                    continue
+                first_lst = self.table[nav_lst[0]][column].pos
                 nav_lst.pop(0)
-            if not nav_lst:
-                continue
-            first_lst = self.table[nav_lst[0]][column].pos
-            nav_lst.pop(0)
-            if not nav_lst:
-                continue
-            for x in nav_lst:
-                if self.table[x][column].pos == first_lst:
-                    for j in range(9):
-                        if self.table[j][column].pos != first_lst:
-                            self.table[j][column].pos = [g for g in self.table[j][column].pos if g not in first_lst]
+                if not nav_lst:
+                    continue
+                for x in nav_lst:
+                    if self.table[x][column].pos == first_lst:
+                        for j in range(9):
+                            if self.table[j][column].pos != first_lst:
+                                self.table[j][column].pos = [g for g in self.table[j][column].pos if g not in first_lst]
         return self.fill_squares()
 
     def naked_pairs_s(self): #TODO: Include while loop for multiple hidden pairs

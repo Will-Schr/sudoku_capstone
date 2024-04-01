@@ -195,6 +195,32 @@ class Test_naked_doubles(unittest.TestCase):
         solution_board.basic_scans()
         self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
 
+    def test_naked_double_vertical_4(self):
+        """
+        Test 4 of naked double vertical; tests for detecting multiple naked pairs
+        """
+        test_board = board(([square(pos_in=[1,2]),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(pos_in=[1,2]),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(8),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(pos_in=[3,4]),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(pos_in=[3,4]),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(pos_in=[1,4,5]),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(9),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(6),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(7),square(),square(),square(),square(),square(),square(),square(),square()]))
+        solution_board = board(([square(pos_in=[1,2]),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(pos_in=[1,2]),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(8),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(pos_in=[3,4]),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(pos_in=[3,4]),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(5),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(9),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(6),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(7),square(),square(),square(),square(),square(),square(),square(),square()]))
+        test_board.naked_pairs_v()
+        solution_board.basic_scans()
+        self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
+
     def test_naked_double_square(self):
         """
         Test 1 of naked double vertical scan; tests first square
