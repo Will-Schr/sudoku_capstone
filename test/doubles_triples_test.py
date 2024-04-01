@@ -13,7 +13,7 @@ from sudoku_package.Square import square
 
 class Test_naked_doubles(unittest.TestCase):
     """Tests matches_h finding naked doubles"""
-    def test_naked_double_horizontal(self):
+    def test_naked_set_horizontal(self):
         """
         Test 1 of naked double horizontal; tests first row
         """
@@ -35,13 +35,13 @@ class Test_naked_doubles(unittest.TestCase):
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()]))
-        test_board.naked_pairs_h()
+        test_board.naked_sets_h()
         solution_board.basic_scans()
         self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
 
-    def test_naked_double_horizontal_2(self):
+    def test_naked_set_horizontal_2(self):
         """
-        Test 2 of naked double horizontal scan; tests last row
+        Test 2 of naked set horizontal scan; tests last row
         """
         test_board = board(([square(),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
@@ -61,13 +61,13 @@ class Test_naked_doubles(unittest.TestCase):
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(pos_in=[1,2]),square(pos_in=[1,2]),square(8),square(4),square(3),square(5),square(9),square(6),square(7)]))
-        test_board.naked_pairs_h()
+        test_board.naked_sets_h()
         solution_board.basic_scans()
         self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
 
-    def test_naked_double_horizontal_3(self):
+    def test_naked_set_horizontal_3(self):
         """
-        Test 3 of naked double horizontal scan; tests to ensure only doubles are found
+        Test 3 of naked set horizontal scan; tests to ensure only doubles are found
         """
         test_board = board(([square(),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
@@ -87,11 +87,11 @@ class Test_naked_doubles(unittest.TestCase):
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(pos_in=[1,2,3]),square(pos_in=[1,2,3]),square(pos_in=[8,9]),square(pos_in=[2,4]),square(pos_in=[2,3]),square(pos_in=[1,5]),square(pos_in=[8,9]),square(6),square(7)]))
-        test_board.naked_pairs_h()
+        test_board.naked_sets_h()
         solution_board.basic_scans()
         self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
 
-    def test_naked_double_horizontal_4(self):
+    def test_naked_set_horizontal_4(self):
         """
         Test 4 of naked double horizontal; tests for detecting multiple naked pairs
         """
@@ -113,7 +113,7 @@ class Test_naked_doubles(unittest.TestCase):
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()]))
-        test_board.naked_pairs_h()
+        test_board.naked_sets_h()
         solution_board.basic_scans()
         self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
 

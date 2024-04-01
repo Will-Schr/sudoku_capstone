@@ -285,26 +285,31 @@ class board:
 
     #TODO: add function for checking that all squares are correct
 
-    def naked_pairs_h(self):
+    def naked_sets_h(self): #TODO: add naked set testing
         """
         Searches for naked pairs horizontally
         """
         for row in self.table:
             nav_lst = list(range(9))
             while nav_lst:
-                while nav_lst and len(row[nav_lst[0]].pos) != 2:
-                    nav_lst.pop(0)
                 if not nav_lst:
                     continue
                 first_lst = row[nav_lst[0]].pos
+                count = 1
                 nav_lst.pop(0)
                 if not nav_lst:
                     continue
+                indexlst = []
                 for x in nav_lst:
                     if row[x].pos == first_lst:
-                        for j in range(9):
-                            if row[j].pos != first_lst:
-                                row[j].pos = [g for g in row[j].pos if g not in first_lst]
+                        count += 1
+                        indexlst.append(x)
+                if count == len(first_lst):
+                    for j in range(9):
+                        if row[j].pos != first_lst:
+                            row[j].pos = [g for g in row[j].pos if g not in first_lst]
+                for index in indexlst:
+                    nav_lst.remove(index)
         return self.fill_squares()
 
     def naked_pairs_v(self):
@@ -413,7 +418,7 @@ class board:
         """
         for _ in range(100):
             self.basic_scans()
-            self.naked_pairs_h()
+            self.naked_sets_h()
             self.naked_pairs_v()
             self.naked_pairs_s()
             self.hidden_pairs_h()
