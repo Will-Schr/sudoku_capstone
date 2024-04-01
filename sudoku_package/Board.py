@@ -285,21 +285,6 @@ class board:
 
     #TODO: add function for checking that all squares are correct
 
-    def matches_h(self): # In progress https://www.thonky.com/sudoku/naked-pairs-triples-quads
-        """
-        Horizontally searches for pairs/triples
-        """
-        #TODO: Find issue
-        # Not overwriting cells
-        for row in self.table: # Horizontal Scan
-            pos_lst = []
-            for box in row:
-                for comp_box in pos_lst:
-                    if box.pos == comp_box:
-                        print("placeholder")
-                pos_lst.append(box.pos)
-        return self.fill_squares()
-
     def naked_pairs_h(self):
         """
         Searches for naked pairs horizontally
