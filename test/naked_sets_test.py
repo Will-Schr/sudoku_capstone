@@ -11,8 +11,10 @@ from sudoku_package.Board import board
 from sudoku_package.Square import square
 
 
-class Test_naked_doubles(unittest.TestCase):
-    """Tests matches_h finding naked doubles"""
+class Test_horizontal_naked_sets(unittest.TestCase):
+    """
+    Tests horizontal naked sets function
+    """
     def test_naked_set_horizontal(self):
         """
         Test 1 of naked set horizontal scan; tests first row
@@ -143,6 +145,10 @@ class Test_naked_doubles(unittest.TestCase):
         solution_board.basic_scans()
         self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
 
+class Test_vertical_naked_sets(unittest.TestCase):
+    """
+    Tests vertical naked sets function
+    """
     def test_naked_double_vertical(self):
         """
         Test 1 of naked double vertical scan; tests first column
@@ -247,9 +253,13 @@ class Test_naked_doubles(unittest.TestCase):
         solution_board.basic_scans()
         self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
 
+class Test_square_naked_sets(unittest.TestCase):
+    """
+    Tests square naked sets function
+    """
     def test_naked_double_square(self):
         """
-        Test 1 of naked double vertical scan; tests first square
+        Test 1 of naked double square scan; tests first square
         """
         test_board = board(([square(pos_in=[1,2,3]),square(pos_in=[1,2,3]),square(pos_in=[8,9]),square(),square(),square(),square(),square(),square()],
                 [square(pos_in=[2,4]),square(pos_in=[2,3]),square(pos_in=[1,5]),square(),square(),square(),square(),square(),square()],
@@ -350,30 +360,6 @@ class Test_naked_doubles(unittest.TestCase):
         test_board.naked_pairs_s()
         solution_board.basic_scans()
         self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
-
-class Test_hidden_doubles(unittest.TestCase):
-    """Tests matches_h finding hidden doubles"""
-    def test_hidden_double_1(self):
-        """Test 1 of hidden double"""
-        test_row = board([[square(pos_in=[1,2,3]), square(pos_in=[1,2,3]), square(pos_in=[3,4]), square(pos_in=[3,5])]])
-        solution_row = board([[square(pos_in=[1,2]), square(pos_in=[1,2]), square(pos_in=[3,4]), square(pos_in=[3,5])]])
-        test_row.hidden_pairs_h()
-        self.assertEqual(test_row.test_out_table(),solution_row.test_out_table())
-
-    def test_hidden_double_2(self):
-        """Test 2 of hidden double"""
-        test_row = board([[square(pos_in=[1,3,5]), square(pos_in=[5,6,7]), square(pos_in=[1,3,7]), square(pos_in=[8,9])]])
-        solution_row = board([[square(pos_in=[1,3]), square(pos_in=[5,6,7]), square(pos_in=[1,3]), square(pos_in=[8,9])]])
-        test_row.hidden_pairs_h()
-        self.assertEqual(test_row.test_out_table(),solution_row.test_out_table())
-
-# class Test_naked_triples(unittest.TestCase):
-#     """Tests matches_h finding naked triples"""
-#     def test_naked_triple_1(self):
-#         """Test 1 of naked triple"""
-#         test_row = board([square(pos_in=[1,2,3]), square(pos_in=[1,2,3]), square(pos_in=[3,4]), square(pos_in=[3,5])])
-#         solution_row = board([square(pos_in=[1,2,3]), square(pos_in=[1,2,3]), square(pos_in=[4]), square(pos_in=[5])])
-#         self.assertEqual(test_row.test_out_row(),solution_row.test_out_row())
 
 if __name__== '__main__':
     unittest.main()
