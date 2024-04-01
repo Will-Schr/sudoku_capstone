@@ -287,7 +287,7 @@ class board:
 
     def naked_sets_h(self): #TODO: add naked set testing
         """
-        Searches for naked pairs horizontally
+        Searches for naked sets horizontally
         """
         for row in self.table:
             nav_lst = list(range(9))
