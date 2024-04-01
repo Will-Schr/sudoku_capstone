@@ -15,7 +15,7 @@ class Test_naked_doubles(unittest.TestCase):
     """Tests matches_h finding naked doubles"""
     def test_naked_set_horizontal(self):
         """
-        Test 1 of naked double horizontal; tests first row
+        Test 1 of naked set horizontal scan; tests first row
         """
         test_board = board(([square(pos_in=[1,2]),square(pos_in=[1,2]),square(8),square(pos_in=[2,4]),square(pos_in=[2,3]),square(pos_in=[1,5]),square(9),square(6),square(7)],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
@@ -93,7 +93,7 @@ class Test_naked_doubles(unittest.TestCase):
 
     def test_naked_set_horizontal_4(self):
         """
-        Test 4 of naked double horizontal; tests for detecting multiple naked pairs
+        Test 4 of naked set horizontal scan; tests for detecting multiple naked pairs
         """
         test_board = board(([square(pos_in=[1,2]),square(pos_in=[1,2]),square(8),square(pos_in=[3,4]),square(pos_in=[3,4]),square(pos_in=[1,4,5]),square(9),square(6),square(7)],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
@@ -105,6 +105,32 @@ class Test_naked_doubles(unittest.TestCase):
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()]))
         solution_board = board(([square(pos_in=[1,2]),square(pos_in=[1,2]),square(8),square(pos_in=[3,4]),square(pos_in=[3,4]),square(5),square(9),square(6),square(7)],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()]))
+        test_board.naked_sets_h()
+        solution_board.basic_scans()
+        self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
+
+    def test_naked_set_horizontal_5(self):
+        """
+        Test 5 of naked set horizontal scan; tests for detecting naked triples
+        """
+        test_board = board(([square(pos_in=[1,2,3]),square(pos_in=[1,2,3]),square(pos_in=[1,2,3]),square(pos_in=[1,5]),square(pos_in=[3,4]),square(pos_in=[2,8]),square(9),square(6),square(7)],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()]))
+        solution_board = board(([square(pos_in=[1,2,3]),square(pos_in=[1,2,3]),square(pos_in=[1,2,3]),square(5),square(4),square(8),square(9),square(6),square(7)],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
