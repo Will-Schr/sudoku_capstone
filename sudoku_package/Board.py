@@ -306,22 +306,23 @@ class board:
         """
         for row in self.table:
             nav_lst = list(range(9))
-            while nav_lst and len(row[nav_lst[0]].pos) != 2:
+            while nav_lst:
+                while nav_lst and len(row[nav_lst[0]].pos) != 2:
+                    nav_lst.pop(0)
+                if not nav_lst:
+                    continue
+                first_lst = row[nav_lst[0]].pos
                 nav_lst.pop(0)
-            if not nav_lst:
-                continue
-            first_lst = row[nav_lst[0]].pos
-            nav_lst.pop(0)
-            if not nav_lst:
-                continue
-            for x in nav_lst:
-                if row[x].pos == first_lst:
-                    for j in range(9):
-                        if row[j].pos != first_lst:
-                            row[j].pos = [g for g in row[j].pos if g not in first_lst]
+                if not nav_lst:
+                    continue
+                for x in nav_lst:
+                    if row[x].pos == first_lst:
+                        for j in range(9):
+                            if row[j].pos != first_lst:
+                                row[j].pos = [g for g in row[j].pos if g not in first_lst]
         return self.fill_squares()
 
-    def naked_pairs_v(self):
+    def naked_pairs_v(self): #TODO: Include while loop for multiple hidden pairs
         """
         Searches for naked pairs vertically
         """
@@ -342,7 +343,7 @@ class board:
                             self.table[j][column].pos = [g for g in self.table[j][column].pos if g not in first_lst]
         return self.fill_squares()
 
-    def naked_pairs_s(self):
+    def naked_pairs_s(self): #TODO: Include while loop for multiple hidden pairs
         """
         Searches for naked pairs in square scans
         """
