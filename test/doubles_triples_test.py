@@ -299,6 +299,32 @@ class Test_naked_doubles(unittest.TestCase):
         solution_board.basic_scans()
         self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
 
+    def test_naked_double_square_4(self):
+        """
+        Test 4 of naked double square; tests for detecting multiple naked pairs
+        """
+        test_board = board(([square(pos_in=[1,2]),square(pos_in=[3,4]),square(9),square(),square(),square(),square(),square(),square()],
+                   [square(pos_in=[1,2]),square(pos_in=[3,4]),square(6),square(),square(),square(),square(),square(),square()],
+                   [square(8),square(pos_in=[1,4,5]),square(7),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()]))
+        solution_board = board(([square(pos_in=[1,2]),square(pos_in=[3,4]),square(9),square(),square(),square(),square(),square(),square()],
+                   [square(pos_in=[1,2]),square(pos_in=[3,4]),square(6),square(),square(),square(),square(),square(),square()],
+                   [square(8),square(5),square(7),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
+                   [square(),square(),square(),square(),square(),square(),square(),square(),square()]))
+        test_board.naked_pairs_s()
+        solution_board.basic_scans()
+        self.assertEqual(test_board.test_out_table(),solution_board.test_out_table())
+
 class Test_hidden_doubles(unittest.TestCase):
     """Tests matches_h finding hidden doubles"""
     def test_hidden_double_1(self):

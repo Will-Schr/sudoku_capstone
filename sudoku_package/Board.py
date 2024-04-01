@@ -322,7 +322,7 @@ class board:
                                 row[j].pos = [g for g in row[j].pos if g not in first_lst]
         return self.fill_squares()
 
-    def naked_pairs_v(self): #TODO: Include while loop for multiple hidden pairs
+    def naked_pairs_v(self):
         """
         Searches for naked pairs vertically
         """
@@ -357,22 +357,23 @@ class board:
                     for y in range(3):
                         nav_lst.append((h_start + x,v_start + y))
                 # Iterates through square pattern to check nav_lst for possible naked pairs
-                while nav_lst and len(self.table[nav_lst[0][0]][nav_lst[0][1]].pos) != 2:
+                while nav_lst:
+                    while nav_lst and len(self.table[nav_lst[0][0]][nav_lst[0][1]].pos) != 2:
+                        nav_lst.pop(0)
+                    if not nav_lst:
+                        continue
+                    first_lst = self.table[nav_lst[0][0]][nav_lst[0][1]].pos
                     nav_lst.pop(0)
-                if not nav_lst:
-                    continue
-                first_lst = self.table[nav_lst[0][0]][nav_lst[0][1]].pos
-                nav_lst.pop(0)
-                if not nav_lst:
-                    continue
-                # Checks if possible naked pair exists in subsquare
-                for pair in nav_lst:
-                    if self.table[pair[0]][pair[1]].pos == first_lst: # Determines that naked pair exists
-                        for x2 in range(3):
-                            for y2 in range(3):
-                                # Removes pair values in cells that are not the naked pair
-                                if self.table[h_start+x2][v_start+y2].pos != first_lst:
-                                    self.table[h_start+x2][v_start+y2].pos = [g for g in self.table[h_start+x2][v_start+y2].pos if g not in first_lst]
+                    if not nav_lst:
+                        continue
+                    # Checks if possible naked pair exists in subsquare
+                    for pair in nav_lst:
+                        if self.table[pair[0]][pair[1]].pos == first_lst: # Determines that naked pair exists
+                            for x2 in range(3):
+                                for y2 in range(3):
+                                    # Removes pair values in cells that are not the naked pair
+                                    if self.table[h_start+x2][v_start+y2].pos != first_lst:
+                                        self.table[h_start+x2][v_start+y2].pos = [g for g in self.table[h_start+x2][v_start+y2].pos if g not in first_lst]
         return self.fill_squares()
 
     def hidden_pairs_h(self): #TODO: manage seemingly hidden pairs like [3,4,7] and [3,4,7]
