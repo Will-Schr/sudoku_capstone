@@ -312,26 +312,31 @@ class board:
                     nav_lst.remove(index)
         return self.fill_squares()
 
-    def naked_pairs_v(self):
+    def naked_sets_v(self):
         """
-        Searches for naked pairs vertically
+        Searches for naked sets vertically
         """
         for column in range(9):
             nav_lst = list(range(9))
             while nav_lst:
-                while nav_lst and len(self.table[nav_lst[0]][column].pos) != 2:
-                    nav_lst.pop(0)
                 if not nav_lst:
                     continue
                 first_lst = self.table[nav_lst[0]][column].pos
+                count = 1
                 nav_lst.pop(0)
                 if not nav_lst:
                     continue
+                indexlst = []
                 for x in nav_lst:
                     if self.table[x][column].pos == first_lst:
-                        for j in range(9):
-                            if self.table[j][column].pos != first_lst:
-                                self.table[j][column].pos = [g for g in self.table[j][column].pos if g not in first_lst]
+                        count += 1
+                        indexlst.append(x)
+                if count == len(first_lst):
+                    for j in range(9):
+                        if self.table[j][column].pos != first_lst:
+                            self.table[j][column].pos = [g for g in self.table[j][column].pos if g not in first_lst]
+                for index in indexlst:
+                    nav_lst.remove(index)
         return self.fill_squares()
 
     def naked_pairs_s(self): #TODO: Include while loop for multiple hidden pairs
@@ -419,7 +424,7 @@ class board:
         for _ in range(100):
             self.basic_scans()
             self.naked_sets_h()
-            self.naked_pairs_v()
+            self.naked_sets_v()
             self.naked_pairs_s()
             self.hidden_pairs_h()
 #TODO: add hidden matches function https://www.thonky.com/sudoku/hidden-pairs-triples-quads
