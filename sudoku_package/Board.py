@@ -283,15 +283,14 @@ class board:
         self.num_inst_chk()
         self.square_check()
 
-    #TODO: add function for checking that all squares are correct
-
-    def naked_sets_h(self): #TODO: add naked set testing
+    def naked_sets_h(self):
         """
         Searches for naked sets horizontally
         """
         for row in self.table:
             nav_lst = list(range(9))
             while nav_lst:
+                # Maybe can be removed?
                 if not nav_lst:
                     continue
                 first_lst = row[nav_lst[0]].pos
@@ -339,7 +338,7 @@ class board:
                     nav_lst.remove(index)
         return self.fill_squares()
 
-    def naked_pairs_s(self): #TODO: Include while loop for multiple hidden pairs
+    def naked_pairs_s(self): #TODO: Include while loop for multiple hidden pairs #TODO: implement naked sets
         """
         Searches for naked pairs in square scans
         """
