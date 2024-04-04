@@ -69,7 +69,7 @@ class Test_horizontal_naked_sets(unittest.TestCase):
 
     def test_naked_set_horizontal_3(self):
         """
-        Test 3 of naked set horizontal scan; tests to ensure only doubles are found
+        Test 3 of naked set horizontal scan; tests to ensure triples are not counted as pairs
         """
         test_board = board(([square(),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
@@ -203,7 +203,7 @@ class Test_vertical_naked_sets(unittest.TestCase):
 
     def test_naked_set_vertical_3(self):
         """
-        Test 3 of naked set vertical scan; tests to ensure only doubles are found
+        Test 3 of naked set vertical scan; tests to ensure two triples aren't found as a pair
         """
         test_board = board(([square(pos_in=[1,2,3]),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(pos_in=[1,2,3]),square(),square(),square(),square(),square(),square(),square(),square()],
@@ -337,7 +337,7 @@ class Test_square_naked_sets(unittest.TestCase):
 
     def test_naked_double_square_3(self):
         """
-        Test 3 of naked double square scan; tests to ensure only doubles are found
+        Test 3 of naked double square scan; tests to ensure two triples aren't found as a pair
         """
         test_board = board(([square(pos_in=[1,2,3]),square(pos_in=[1,2,3]),square(pos_in=[8,9]),square(),square(),square(),square(),square(),square()],
                    [square(pos_in=[2,4]),square(pos_in=[2,3]),square(pos_in=[1,5]),square(),square(),square(),square(),square(),square()],
