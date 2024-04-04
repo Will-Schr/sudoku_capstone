@@ -1,12 +1,21 @@
 # pylint: disable=no-member,too-many-branches,too-many-nested-blocks
 """
 Module that contains the board class
+
+Classes:
+    board
 """
 from sudoku_package.Square import square
 
 class board:
-    """Class that holds and modifies sudoku table"""
-    def __init__(self, table_in = None):
+    """
+    Class that holds and modifies sudoku table.
+
+    Attributes:
+        table(list): list of lists of square classes to represent sudoku board
+        solved (bool): status if board is solved
+    """
+    def __init__(self, table_in:list = None):
         if table_in is None:
             self.table = [[square(),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
@@ -19,7 +28,11 @@ class board:
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()]]
         else:
             self.table = table_in
-        self.solved = False
+        self.solved = False #TODO: needs implmentation
+
+
+    ##### Board Maintanance functions #####
+
 
     def clear_board(self):
         """
@@ -53,6 +66,9 @@ class board:
     def is_valid(self):
         """
         Returns if the board is valid, i.e. doesn't have multiple combinations of a number within it
+
+        Returns:
+            (bool): whether board is a valid sudoku board
         """
         # Iterates horizontally
         for row in self.table:
@@ -89,6 +105,9 @@ class board:
     def test_unsolved(self):
         """
         Displays number of unsolved cells
+
+        Returns:
+            unsolved(int): number of unsolved squares on the board
         """
         unsolved = 0
         for i in range(9):
@@ -99,9 +118,9 @@ class board:
 
 
     # User input/output functions
-    def manual_fill_table(self):    # Allows user to fill out table manually
+    def manual_fill_table(self):
         """
-        Fills table through the terminal
+        Allows the user to fill the table through the terminal
         (Currently not used; primarily used for early stages of testing)
         """
         print ("Fill the table by row moving from left to right; use zero for squares which are not filled in.")
@@ -155,10 +174,12 @@ class board:
             print("\n")
         print ("\n")
 
-    # Sudoku solving functions (return true/false if they make change)
     def fill_squares(self):
         """
-        Fills squares in board that only have one possibile answer
+        Fills squares in board that only have one possible answer
+
+        Returns:
+            change(bool): whether the board made was able to fill any squares
         """
         change = False
         for i in self.table:
@@ -170,9 +191,16 @@ class board:
             self.basic_scans()
         return change
 
+
+    ##### Basic Sudoku Solving Functions #####
+
+
     def hor_comp(self):
         """
         Adjusts possible values in each square; scanning by row
+
+        Returns:
+            (bool): result of fill_squares after the scanning completes
         """
         for i in self.table:
             temp_table = []
@@ -180,12 +208,15 @@ class board:
                 if len(j.pos) == 0:
                     temp_table.append(j.value)
             for k in i:
-                k.pos = [x for x in k.pos if x not in temp_table]   # TODO: test check else if continue makes faster
+                k.pos = [x for x in k.pos if x not in temp_table]
         return self.fill_squares()
 
-    def vert_comp(self):    # Is there a cleaner way?
+    def vert_comp(self):
         """
         Adjusts possible values in each square; scanning by column
+        
+        Returns:
+            (bool): result of fill_squares after the scanning completes
         """
         for x in range(9):
             temp_table = []
@@ -200,8 +231,11 @@ class board:
     def square_check(self):
         """
         Adjusts possible values in each square; scanning by 3x3 square
+
+        Returns:
+            (bool): result of fill_squares after the scanning completes
         """
-        hor_index = vert_index = [0,3,6]
+        hor_index = vert_index = [0,3,6] # Indexes used of offsetting for squares
         for h_start in hor_index:
             for v_start in vert_index:
                 square_lst = []
@@ -214,13 +248,17 @@ class board:
                         self.table[h_start + x][v_start + y].pos = [x for x in self.table[h_start + x][v_start + y].pos if x not in square_lst]
         return  self.fill_squares()
 
-    def num_inst_chk(self): # Checks by number (in progress)
+    def num_inst_chk(self): #TODO: implement check
         """
         Checks if there is a square that contains the only instance of a number
         Scans horizontally, vertically, and by square
+        
+        Returns:
+            (bool): result of fill_squares after the scanning completes
         """
-        for num_check in range(1,10):   #TODO: replace x and y values
-            for i in self.table: # Horizontal check
+        for num_check in range(1,10):
+            # Horizontal check
+            for i in self.table:
                 num_of_instance = 0 # Maybe replace with bool
                 index = -1
                 input_index = None # Index of value to input
@@ -229,7 +267,7 @@ class board:
                     if j.value == num_check:
                         num_of_instance = 2
                         break
-                    elif num_check in j.pos:
+                    if num_check in j.pos:
                         num_of_instance += 1
                         input_index = index
                         if num_of_instance > 1:
@@ -237,7 +275,8 @@ class board:
                 if num_of_instance == 1:
                     i[input_index].set_val(num_check)
 
-            for y in range(9): # Vertical check
+            # Vertical check
+            for y in range(9):
                 num_of_instance = 0
                 index = -1
                 input_index = None
@@ -254,7 +293,8 @@ class board:
                 if num_of_instance == 1:
                     self.table[input_index][y].set_val(num_check)
 
-            hor_index = vert_index = [0,3,6] #Box Check
+            #Box Check
+            hor_index = vert_index = [0,3,6] # Indexes used of offsetting for squares
             for h_start in hor_index:
                 for v_start in vert_index:
                     num_of_instance = 0
@@ -277,36 +317,44 @@ class board:
     def basic_scans(self):
         """
         Function to perform basic sudoku scans
+        
+        Returns:
+            (bool): result of fill_squares after the scanning completes
         """
-        self.hor_comp()
-        self.vert_comp()
-        self.num_inst_chk()
-        self.square_check()
+        return self.hor_comp() or self.vert_comp() or self.num_inst_chk() or self.square_check()
+
+
+    ##### Naked Set Functions #####
+
 
     def naked_sets_h(self):
         """
         Searches for naked sets horizontally
+        
+        Returns:
+            (bool): result of fill_squares after the scanning completes
         """
         for row in self.table:
-            nav_lst = list(range(9))
+            nav_lst = list(range(9)) # List of indicies used to iterate
             while nav_lst:
-                # Maybe can be removed?
-                if not nav_lst:
-                    continue
                 first_lst = row[nav_lst[0]].pos
-                count = 1
+                count = 1 # Number of matches
                 nav_lst.pop(0)
                 if not nav_lst:
                     continue
                 indexlst = []
+                # Iterates through each unchecked square for matches
                 for x in nav_lst:
                     if row[x].pos == first_lst:
                         count += 1
                         indexlst.append(x)
+                # If there is matches equal to the length there is a hidden set
+                # those values are removed from other squares
                 if count == len(first_lst):
                     for j in range(9):
                         if row[j].pos != first_lst:
                             row[j].pos = [g for g in row[j].pos if g not in first_lst]
+                # Any matched set squares are removed so they are not checked again
                 for index in indexlst:
                     nav_lst.remove(index)
         return self.fill_squares()
@@ -314,33 +362,41 @@ class board:
     def naked_sets_v(self):
         """
         Searches for naked sets vertically
+        
+        Returns:
+            (bool): result of fill_squares after the scanning completes
         """
         for column in range(9):
-            nav_lst = list(range(9))
+            nav_lst = list(range(9)) # List of indicies used to iterate
             while nav_lst:
-                if not nav_lst:
-                    continue
                 first_lst = self.table[nav_lst[0]][column].pos
-                count = 1
+                count = 1 # Number of matches
                 nav_lst.pop(0)
                 if not nav_lst:
                     continue
                 indexlst = []
+                # Iterates through each unchecked square for matches
                 for x in nav_lst:
                     if self.table[x][column].pos == first_lst:
                         count += 1
                         indexlst.append(x)
+                # If there is matches equal to the length there is a hidden set
+                # those values are removed from other squares
                 if count == len(first_lst):
                     for j in range(9):
                         if self.table[j][column].pos != first_lst:
                             self.table[j][column].pos = [g for g in self.table[j][column].pos if g not in first_lst]
+                # Any matched set squares are removed so they are not checked again
                 for index in indexlst:
                     nav_lst.remove(index)
         return self.fill_squares()
 
-    def naked_pairs_s(self): #TODO: Include while loop for multiple hidden pairs #TODO: implement naked sets
+    def naked_pairs_s(self): #TODO: implement naked sets
         """
         Searches for naked pairs in square scans
+
+        Returns:
+            (bool): result of fill_squares after the scanning completes
         """
         hor_index = vert_index = [0,3,6]
         for h_start in hor_index:
@@ -370,9 +426,25 @@ class board:
                                         self.table[h_start+x2][v_start+y2].pos = [g for g in self.table[h_start+x2][v_start+y2].pos if g not in first_lst]
         return self.fill_squares()
 
+    def naked_set_scan(self):
+        """
+        Function to perform basic sudoku scans
+        
+        Returns:
+            (bool): result of fill_squares after the scanning completes
+        """
+        return self.naked_sets_h() or self.naked_sets_v() or self.naked_pairs_s()
+
+
+    ##### Hidden Set Functions #####
+
+
     def hidden_pairs_h(self): #TODO: manage seemingly hidden pairs like [3,4,7] and [3,4,7]
         """
         Finds hidden pairs and adjusts pos values accordingly
+
+        Returns:
+            (bool): result of fill_squares after the scanning completes
         """
         for row in self.table:
             all_unplaced = []
@@ -422,8 +494,6 @@ class board:
         """
         for _ in range(100):
             self.basic_scans()
-            self.naked_sets_h()
-            self.naked_sets_v()
-            self.naked_pairs_s()
+            self.naked_set_scan()
             self.hidden_pairs_h()
-#TODO: add hidden matches function https://www.thonky.com/sudoku/hidden-pairs-triples-quads
+#TODO: add pointing pairs function
