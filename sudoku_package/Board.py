@@ -248,7 +248,7 @@ class board:
                         self.table[h_start + x][v_start + y].pos = [x for x in self.table[h_start + x][v_start + y].pos if x not in square_lst]
         return  self.fill_squares()
 
-    def num_inst_chk(self): #TODO: implement check
+    def num_inst_chk(self):
         """
         Checks if there is a square that contains the only instance of a number
         Scans horizontally, vertically, and by square
@@ -391,7 +391,7 @@ class board:
                     nav_lst.remove(index)
         return self.fill_squares()
 
-    def naked_pairs_s(self): #TODO: implement naked sets
+    def naked_sets_s(self):
         """
         Searches for naked pairs in square scans
 
@@ -408,22 +408,24 @@ class board:
                         nav_lst.append((h_start + x,v_start + y))
                 # Iterates through square pattern to check nav_lst for possible naked pairs
                 while nav_lst:
-                    while nav_lst and len(self.table[nav_lst[0][0]][nav_lst[0][1]].pos) != 2:
-                        nav_lst.pop(0)
-                    if not nav_lst:
-                        continue
                     first_lst = self.table[nav_lst[0][0]][nav_lst[0][1]].pos
+                    count = 1
                     nav_lst.pop(0)
                     if not nav_lst:
                         continue
+                    indexlst = []
                     # Checks if possible naked pair exists in subsquare
                     for pair in nav_lst:
                         if self.table[pair[0]][pair[1]].pos == first_lst: # Determines that naked pair exists
-                            for x2 in range(3):
-                                for y2 in range(3):
-                                    # Removes pair values in cells that are not the naked pair
-                                    if self.table[h_start+x2][v_start+y2].pos != first_lst:
-                                        self.table[h_start+x2][v_start+y2].pos = [g for g in self.table[h_start+x2][v_start+y2].pos if g not in first_lst]
+                            count += 1
+                            indexlst.append(pair)
+                    if count == len(first_lst):
+                        for x2 in range(3):
+                            for y2 in range(3):
+                                if self.table[h_start+x2][v_start+y2].pos != first_lst:
+                                    self.table[h_start+x2][v_start+y2].pos = [g for g in self.table[h_start+x2][v_start+y2].pos if g not in first_lst]
+                    for pair in indexlst:
+                        nav_lst.remove(pair)
         return self.fill_squares()
 
     def naked_set_scan(self):
@@ -433,7 +435,7 @@ class board:
         Returns:
             (bool): result of fill_squares after the scanning completes
         """
-        return self.naked_sets_h() or self.naked_sets_v() or self.naked_pairs_s()
+        return self.naked_sets_h() or self.naked_sets_v() or self.naked_sets_s()
 
 
     ##### Hidden Set Functions #####
