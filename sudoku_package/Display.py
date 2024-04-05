@@ -170,7 +170,6 @@ class SudokuBoardGUI:
         Function to initiate solve within board class
         """
         self.sudBoard.solve()
-        self.sudBoard.print_table()
         self.draw_numbers()
 
 def main():
