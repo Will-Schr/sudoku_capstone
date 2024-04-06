@@ -20,8 +20,10 @@ https://docs.google.com/document/d/1yM8j9oQuLddpmENXPrZAojS8kFkkqgJYsSnM_zWwP3o/
 ## Test Plans
 
 ## User Manual
+https://github.com/Will-Schr/sudoku_capstone/blob/main/assignment_2/instructions.md
 
 ## Final Presentation Slides
+https://1drv.ms/p/s!As9NLsfDCBxjlyx3HvJgmCpSMDhO?e=Mub3w3
 
 ## Self Assessment Essays
 Michael Lieu's initial self assessment essay:
@@ -37,16 +39,6 @@ Will Schreiner's initial self assessment essay:
 
 Will Schreiner's final self assessment essay:
 (placeholder)
-
-## Professional Biographies
-Michael Lieu's professional biography:
-
-https://github.com/Will-Schr/sudoku_capstone/blob/main/assignments/MichaelLieu_ProfessionalBio.md
-
-
-Will Schreiner's professional biography:
-
-https://github.com/Will-Schr/sudoku_capstone/blob/main/assignments/WillSchreiner_ProfessionalBio.md
 
 ## Summary of Hours and Justification
 
