@@ -42,6 +42,14 @@ Will Schreiner's final self assessment essay:
 
 ## Summary of Hours and Justification
 
+Michael Lieu's Summary of Hours and Justification:
+
+https://docs.google.com/document/d/12_VdRFSb3JF6YhvF8jlNbxcUb9qvEYmVnWdeuSFPQkk/edit?usp=sharing
+
+Will Schreiner's Summary of Hours and Justification:
+
+(placeholder)
+
 ## Budget
 There were no expenses. This was programmed using Python, TkInter, and Visual Studio Code and was managed using GitHub -- all of these technologies are free.
 
