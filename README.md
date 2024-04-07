@@ -14,16 +14,20 @@ algorithms that will take inputs from the GUI, solve the board based on those in
 project is the utilization of human-solvable algorithms as opposed to computer solvable algorithms, the latter of which rely on brute force 
 tactics while the human-solvable algorithms are more intuitive in nature.
 
-## User Stories and Design Diagrams
-https://docs.google.com/document/d/1yM8j9oQuLddpmENXPrZAojS8kFkkqgJYsSnM_zWwP3o/edit?usp=sharing
+## User Interface Specification
+https://docs.google.com/document/d/1fIRKCttxAFfgcy85ahNtcByQR3PaE-dxtV5WL764etM/edit?usp=sharing
 
 ## Test Plans
+https://docs.google.com/document/d/1LpXO1jyptIQwR8FSYAhol1jXUDputRI-_KNOx745PqY/edit?usp=sharing
 
 ## User Manual
 https://github.com/Will-Schr/sudoku_capstone/blob/main/assignment_2/instructions.md
 
 ## Final Presentation Slides
 https://1drv.ms/p/s!As9NLsfDCBxjlyx3HvJgmCpSMDhO?e=Mub3w3
+
+## Expo Poster
+https://1drv.ms/p/s!As9NLsfDCBxjly6JBZJSccfMGzDg?e=wvPGIK
 
 ## Self Assessment Essays
 Michael Lieu's initial self assessment essay:
