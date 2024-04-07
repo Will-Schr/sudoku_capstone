@@ -1,6 +1,6 @@
 # pylint: disable=wrong-import-position, too-many-instance-attributes
 """
-Module holding the sudoku GUI class
+Module holding the Sudoku GUI class
 """
 import tkinter as tk
 import sys
@@ -16,12 +16,12 @@ class SudokuBoardGUI:
     3. Traversal methods
     4. Input method
     5. Delete method
-    6. Clear board method
-    7. Solve method
-    8. Highlight cell method
+    6. Highlight cell method
+    7. Clear board method
+    8. Solve method 
     """
-    #Function to initialize the board
     def __init__(self, master, board_in):
+        """The init function initializes the GUI"""
         #First, we want to initialize our board, columns, rows, and canvas.
         self.master = master
         self.current_row, self.current_col = 0, 0
@@ -51,13 +51,12 @@ class SudokuBoardGUI:
         #These set up the buttons that will be displayed on the board.
         self.clear_button = tk.Button(master, text="Clear Board", command=self.clear_board)
         self.clear_button.pack()
-
         self.solve_button = tk.Button(master, text="Solve", command=self.solve_sudoku)
         self.solve_button.pack()
 
     def draw_grid(self):
         """
-        Function that creates a grid on the canvas
+        Function that draws a grid on the canvas
         """
         for i in range(10):
             width = 2 if i % 3 == 0 else 1
@@ -66,7 +65,7 @@ class SudokuBoardGUI:
 
     def draw_numbers(self):
         """
-        Functionality for displaying the numbers in the cell
+        Function that draws the numbers in the cell
         """
         self.canvas.delete('numbers')
         for i in range(9):
@@ -88,46 +87,78 @@ class SudokuBoardGUI:
 
     def move_left(self, event):
         """
-        Functionality for moving highlighted square to the left
+        Functionality for selecting and highlighting square to the left
+        Going all the way to the left takes you to the previous row
+        Going all the way to the start takes you to the end of the board
         """
-        if self.current_col > 0:
+        if self.current_col == 0:
+            if self.current_row == 0:
+                self.current_row,self.current_col = 8,8
+            else:
+                self.current_col = 8
+                self.current_row -= 1
+        else:
             self.current_col -= 1
-            self.draw_highlight()
-            self.canvas.focus_set()
+        self.draw_highlight()
+        self.canvas.focus_set()
 
     def move_right(self, event):
         """
-        Functionality for moving highlighted square to the right
+        Functionality for selecting and highlighting square to the right
+        Going all the way to the right takes you to the next row
+        Going all the way to the end takes you to the start of the board
         """
-        if self.current_col < 8:
+        if self.current_col == 8:
+            if self.current_row == 8:
+                self.current_row, self.current_col = 0,0
+            else:
+                self.current_col = 0
+                self.current_row += 1
+        else:
             self.current_col += 1
-            self.draw_highlight()
-            self.canvas.focus_set()
+        self.draw_highlight()
+        self.canvas.focus_set()
 
     def move_up(self, event):
         """
-        Functionality for moving highlighted square up
+        Functionality for selecting and highlighting square upwards
+        Going up all the way up takes you to the previous column
+        Going all the way to the start takes you to the end of the board
         """
-        if self.current_row > 0:
+        if self.current_row == 0:
+            if self.current_col == 0:
+                self.current_row, self.current_col = 8,8
+            else:
+                self.current_row = 8
+                self.current_col -= 1
+        else:
             self.current_row -= 1
-            self.draw_highlight()
-            self.canvas.focus_set()
+        self.draw_highlight()
+        self.canvas.focus_set()
 
     def move_down(self, event):
         """
-        Functionality for moving highlighted square down
+        Functionality for selecting and highlighting square downwards
+        Going down all the way takes you to the next column
+        Going all the way to the end takes you to the start of the board
         """
-        if self.current_row < 8:
+        if self.current_row == 8:
+            if self.current_col == 8:
+                self.current_row, self.current_col = 0,0
+            else:
+                self.current_row = 0
+                self.current_col += 1
+        else:
             self.current_row += 1
-            self.draw_highlight()
-            self.canvas.focus_set()
+        self.draw_highlight()
+        self.canvas.focus_set()
 
     def input_number(self, event):
         """
         Functionality for inputting a number and ONLY a number
         """
         if '1' <= event.char <= '9':
-            number = int(event.char) #conversion necessary
+            number = int(event.char)
             self.sudBoard.table[self.current_row][self.current_col].set_val(number)
             self.draw_numbers()
 
@@ -152,7 +183,7 @@ class SudokuBoardGUI:
 
     def clear_board(self):
         """
-        Function to initiate clearing the board
+        Function to clear the board
         """
         self.sudBoard = board(([square(),square(),square(),square(),square(),square(),square(),square(),square()],
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()],
@@ -167,7 +198,7 @@ class SudokuBoardGUI:
 
     def solve_sudoku(self):
         """
-        Function to initiate solve within board class
+        Function to call the solve function within board class for the board
         """
         self.sudBoard.solve()
         self.sudBoard.print_table()
