@@ -76,7 +76,10 @@ class SudokuBoardGUI:
             for j in range(9):
                 num = self.sudBoard.table[i][j].value
                 if num != 0:
-                    self.canvas.create_text(j * 50 + 25, i * 50 + 25, text=num, tags='numbers')
+                    color = "black"
+                    if self.sudBoard.table[i][j].solved:
+                        color = "blue"
+                    self.canvas.create_text(j * 50 + 25, i * 50 + 25, text=num, tags='numbers',fill=color)
 
     def mouse_click(self, event):
         """
@@ -177,6 +180,7 @@ class SudokuBoardGUI:
         if '1' <= event.char <= '9':
             number = int(event.char)
             self.sudBoard.table[self.current_row][self.current_col].set_val(number)
+            self.sudBoard.table[self.current_row][self.current_col].solved = False
             self.draw_numbers()
             self.move_right(event)
 
