@@ -225,7 +225,6 @@ class SudokuBoardGUI:
             return
         if self.sudBoard.solve():
             messagebox.showerror("Success!", "Your board has been solved!")
-        self.sudBoard.print_table()
         self.draw_numbers()
 
 def main():
