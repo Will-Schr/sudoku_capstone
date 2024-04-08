@@ -53,7 +53,7 @@ class SudokuBoardGUI:
         self.highlight_cell = None
 
         #These set up the buttons that will be displayed on the board.
-        self.clear_button = tk.Button(master, text="Clear Board", command=self.clear_board)
+        self.clear_button = tk.Button(master, text="Clear Board", command=lambda: [self.sudBoard.clear_board(), self.draw_numbers()])
         self.clear_button.pack()
         self.solve_button = tk.Button(master, text="Solve", command=self.solve_sudoku)
         self.solve_button.pack()
@@ -200,21 +200,6 @@ class SudokuBoardGUI:
         x0, y0 = self.current_col * 50, self.current_row * 50
         x1, y1 = x0 + 50, y0 + 50
         self.highlight_cell = self.canvas.create_rectangle(x0, y0, x1, y1, outline="blue", width=2)
-
-    def clear_board(self):
-        """
-        Function to clear the board
-        """
-        self.sudBoard = board(([square(),square(),square(),square(),square(),square(),square(),square(),square()],
-                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
-                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
-                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
-                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
-                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
-                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
-                   [square(),square(),square(),square(),square(),square(),square(),square(),square()],
-                   [square(),square(),square(),square(),square(),square(),square(),square(),square()]))
-        self.draw_numbers()
 
     def solve_sudoku(self):
         """
