@@ -3,6 +3,7 @@
 Module holding the Sudoku GUI class
 """
 import tkinter as tk
+import tkinter.messagebox as messagebox
 import sys
 sys.path.append(".")
 from sudoku_package.Board import board
@@ -36,11 +37,13 @@ class SudokuBoardGUI:
         #functionality
         master.bind('<Key>', self.input_number)
         master.bind('<BackSpace>', self.delete_number)
+        master.bind('<Delete>', self.delete_number)
         self.canvas.bind('<Button-1>', self.mouse_click)
         master.bind('<Left>', self.move_left)
         master.bind('<Right>', self.move_right)
         master.bind('<Up>', self.move_up)
         master.bind('<Down>', self.move_down)
+        master.bind('<Return>', self.move_row)
 
         #This creates the puzzle/board.
         self.sudBoard = board_in
@@ -152,24 +155,40 @@ class SudokuBoardGUI:
             self.current_row += 1
         self.draw_highlight()
         self.canvas.focus_set()
+    
+    def move_row(self,event):
+        """
+        Functionality for selecting cell in next row
+        Going down past the end takes you to the top of the board
+        """
+        if self.current_row == 8:
+            self.current_row = 0
+        else:
+            self.current_row += 1
+        self.draw_highlight()
+        self.canvas.focus_set()
 
     def input_number(self, event):
         """
         Functionality for inputting a number and ONLY a number
+        Inputting a number calls the move_right function
         """
         if '1' <= event.char <= '9':
             number = int(event.char)
             self.sudBoard.table[self.current_row][self.current_col].set_val(number)
             self.draw_numbers()
+        self.move_right(event)
 
     def delete_number(self,event):
         """
         Functionality for deleting a number
+        Deleting a number calls the move_left function
         """
         if self.sudBoard.table[self.current_row][self.current_col].value:
             self.sudBoard.table[self.current_row][self.current_col] = square()
             self.draw_numbers()
             self.canvas.focus_set()
+        self.move_left(event)
 
     def draw_highlight(self):
         """
@@ -198,9 +217,13 @@ class SudokuBoardGUI:
 
     def solve_sudoku(self):
         """
-        Function to call the solve function within board class for the board
+        Function to first call is_valid function within board class for the board and then call the solve function within board class for the board
         """
-        self.sudBoard.solve()
+        while not self.sudBoard.is_valid():
+            messagebox.showerror("Invalid board", "Your inputs are invalid! Please input your values into the board correctly.")
+            return
+        if self.sudBoard.solve():
+            messagebox.showerror("Success!", "Your board has been solved!")
         self.sudBoard.print_table()
         self.draw_numbers()
 
