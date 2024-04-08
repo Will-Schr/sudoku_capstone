@@ -41,6 +41,7 @@ class SudokuBoardGUI:
         self.canvas.bind('<Button-1>', self.mouse_click)
         master.bind('<Left>', self.move_left)
         master.bind('<Right>', self.move_right)
+        master.bind('<space>', self.move_right)
         master.bind('<Up>', self.move_up)
         master.bind('<Down>', self.move_down)
         master.bind('<Return>', self.move_row)
@@ -177,7 +178,7 @@ class SudokuBoardGUI:
             number = int(event.char)
             self.sudBoard.table[self.current_row][self.current_col].set_val(number)
             self.draw_numbers()
-        self.move_right(event)
+            self.move_right(event)
 
     def delete_number(self,event):
         """
