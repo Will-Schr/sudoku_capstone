@@ -2,7 +2,6 @@
 Module that contains the backtracking solve function
 """
 import copy
-from sudoku_package.Square import square
 from sudoku_package.Board import board
 
 def backtrack_solve(board_in:board):
