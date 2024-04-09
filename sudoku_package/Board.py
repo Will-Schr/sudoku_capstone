@@ -500,7 +500,9 @@ class board:
             self.hidden_pairs_h()
             # self.point_pairs()
 
- ##### Backtracking Solve Functions #####
+
+    ##### Backtracking Solve Functions #####
+
 
     def get_next_unsolved(self):
         """
