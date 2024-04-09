@@ -1,4 +1,4 @@
-# pylint: disable=wrong-import-position, too-many-instance-attributes
+# pylint: disable=wrong-import-position, too-many-instance-attributes, unused-argument
 """
 Module holding the Sudoku GUI class
 """
@@ -8,6 +8,7 @@ import sys
 sys.path.append(".")
 from sudoku_package.Board import board
 from sudoku_package.Square import square
+from sudoku_package.backtrack import backtrack_solve
 
 class SudokuBoardGUI:
     """
@@ -136,7 +137,7 @@ class SudokuBoardGUI:
             self.current_row += 1
         self.draw_highlight()
         self.canvas.focus_set()
-    
+
     def move_row(self,event):
         """
         Functionality for selecting cell in next row
@@ -185,9 +186,14 @@ class SudokuBoardGUI:
         while not self.sudBoard.is_valid():
             messagebox.showerror("Invalid board", "Your inputs are invalid! Please input your values into the board correctly.")
             return
-        if self.sudBoard.solve():
-            messagebox.showerror("Success!", "Your board has been solved!")
+        self.sudBoard.solve()
         self.draw_numbers()
+        if not self.sudBoard.solved:
+            messagebox.showerror("Failure", "This board requries guessing, implementing backtracking")
+            self.sudBoard = backtrack_solve(self.sudBoard)
+            self.draw_numbers()
+            # messagebox.showerror("Complete")
+
 
 def main():
     """

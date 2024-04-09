@@ -441,7 +441,7 @@ class board:
     ##### Hidden Set Functions #####
 
 
-    def hidden_pairs_h(self): #TODO: manage seemingly hidden pairs like [3,4,7] and [3,4,7]
+    def hidden_pairs_h(self):
         """
         Finds hidden pairs and adjusts pos values accordingly
 
@@ -480,7 +480,6 @@ class board:
                                         count = 0
                                         break
                             if count == 2:
-                                # TODO: Consider replacing with indicies to prevent extra cycles/nested looping
                                 for box_rep in row:
                                     if first_val in box_rep.pos and second_val in box_rep.pos:
                                         # Ordering here isn't necessary, but keeps the pos lists much more clean
@@ -526,7 +525,5 @@ class board:
         Returns:
             (bool): if board object is solved
         """
-        self.solved = True
-        return self.is_valid() and self .test_unsolved() == 0
-
-#TODO: add pointing pairs function
+        self.solved = self.is_valid() and self .test_unsolved() == 0
+        return self.solved
