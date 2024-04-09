@@ -28,7 +28,7 @@ class board:
                    [square(),square(),square(),square(),square(),square(),square(),square(),square()]]
         else:
             self.table = table_in
-        self.solved = False #TODO: needs implmentation
+        self.solved = False
 
 
     ##### Board Maintanance functions #####
@@ -76,7 +76,7 @@ class board:
             for box in row:
                 if box.value == "?":
                     continue
-                if box in row_lst:
+                if box.value in row_lst:
                     return False
                 row_lst.append(box.value)
         # Iterates vertically
@@ -498,4 +498,31 @@ class board:
             self.basic_scans()
             self.naked_set_scan()
             self.hidden_pairs_h()
+            # self.point_pairs()
+
+ ##### Backtracking Solve Functions #####
+
+    def get_next_unsolved(self):
+        """
+        Returns position of the next unsolved cell
+
+        Returns:
+            (list): a list containing the coordinates of the cell within the list of lists table attribute
+            (none): there are no unsolved cells within the board
+        """
+        for row in range(9):
+            for column in range(9):
+                if self.table[row][column].value is False:
+                    return[row,column]
+
+    def is_solved(self):
+        """
+        Determines if board object is a solved sudoku table
+
+        Returns:
+            (bool): if board object is solved
+        """
+        self.solved = True
+        return self.is_valid() and self .test_unsolved() == 0
+
 #TODO: add pointing pairs function
