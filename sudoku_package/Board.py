@@ -74,7 +74,7 @@ class board:
         for row in self.table:
             row_lst = []
             for box in row:
-                if box.value == "?":
+                if box.value == 0:
                     continue
                 if box.value in row_lst:
                     return False
@@ -498,7 +498,9 @@ class board:
             self.basic_scans()
             self.naked_set_scan()
             self.hidden_pairs_h()
-            # self.point_pairs()
+            self.is_solved()
+            if self.solved:
+                return
 
 
     ##### Backtracking Solve Functions #####
