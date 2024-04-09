@@ -63,7 +63,7 @@ class SudokuBoardGUI:
         Function that draws a grid on the canvas
         """
         for i in range(10):
-            width = 2 if i % 3 == 0 else 1
+            width = 3 if i % 3 == 0 else 1
             self.canvas.create_line(i * 50, 0, i * 50, 450, width=width)
             self.canvas.create_line(0, i * 50, 450, i * 50, width=width)
 
@@ -79,7 +79,8 @@ class SudokuBoardGUI:
                     color = "black"
                     if self.sudBoard.table[i][j].solved:
                         color = "blue"
-                    self.canvas.create_text(j * 50 + 25, i * 50 + 25, text=num, tags='numbers',fill=color)
+                    font_size = 20
+                    self.canvas.create_text(j * 50 + 25, i * 50 + 25, text=num, tags='numbers', fill=color, font = ('Arial',font_size,'bold'))
 
     def mouse_click(self, event):
         """
@@ -98,13 +99,7 @@ class SudokuBoardGUI:
         Going all the way to the left takes you to the previous row
         Going all the way to the start takes you to the end of the board
         """
-        if self.current_col == 0:
-            if self.current_row == 0:
-                self.current_row,self.current_col = 8,8
-            else:
-                self.current_col = 8
-                self.current_row -= 1
-        else:
+        if self.current_col > 0:
             self.current_col -= 1
         self.draw_highlight()
         self.canvas.focus_set()
@@ -115,13 +110,7 @@ class SudokuBoardGUI:
         Going all the way to the right takes you to the next row
         Going all the way to the end takes you to the start of the board
         """
-        if self.current_col == 8:
-            if self.current_row == 8:
-                self.current_row, self.current_col = 0,0
-            else:
-                self.current_col = 0
-                self.current_row += 1
-        else:
+        if self.current_col < 8:
             self.current_col += 1
         self.draw_highlight()
         self.canvas.focus_set()
@@ -132,13 +121,7 @@ class SudokuBoardGUI:
         Going up all the way up takes you to the previous column
         Going all the way to the start takes you to the end of the board
         """
-        if self.current_row == 0:
-            if self.current_col == 0:
-                self.current_row, self.current_col = 8,8
-            else:
-                self.current_row = 8
-                self.current_col -= 1
-        else:
+        if self.current_row > 0:
             self.current_row -= 1
         self.draw_highlight()
         self.canvas.focus_set()
@@ -149,13 +132,7 @@ class SudokuBoardGUI:
         Going down all the way takes you to the next column
         Going all the way to the end takes you to the start of the board
         """
-        if self.current_row == 8:
-            if self.current_col == 8:
-                self.current_row, self.current_col = 0,0
-            else:
-                self.current_row = 0
-                self.current_col += 1
-        else:
+        if self.current_row < 8:
             self.current_row += 1
         self.draw_highlight()
         self.canvas.focus_set()
@@ -175,25 +152,21 @@ class SudokuBoardGUI:
     def input_number(self, event):
         """
         Functionality for inputting a number and ONLY a number
-        Inputting a number calls the move_right function
         """
         if '1' <= event.char <= '9':
             number = int(event.char)
             self.sudBoard.table[self.current_row][self.current_col].set_val(number)
             self.sudBoard.table[self.current_row][self.current_col].solved = False
             self.draw_numbers()
-            self.move_right(event)
 
     def delete_number(self,event):
         """
         Functionality for deleting a number
-        Deleting a number calls the move_left function
         """
         if self.sudBoard.table[self.current_row][self.current_col].value:
             self.sudBoard.table[self.current_row][self.current_col] = square()
             self.draw_numbers()
             self.canvas.focus_set()
-        self.move_left(event)
 
     def draw_highlight(self):
         """
