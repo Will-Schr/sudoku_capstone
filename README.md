@@ -42,7 +42,7 @@ Will Schreiner's initial self assessment essay:
 (placeholder)
 
 Will Schreiner's final self assessment essay:
-(placeholder)
+https://docs.google.com/document/d/13XlRaBcYDmY99su4GIdvmnPtv2uw6tVPDZwxI3jYv6M/edit?usp=sharing
 
 ## Summary of Hours and Justification
 
