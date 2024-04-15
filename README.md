@@ -52,7 +52,7 @@ https://docs.google.com/document/d/12_VdRFSb3JF6YhvF8jlNbxcUb9qvEYmVnWdeuSFPQkk/
 
 Will Schreiner's Summary of Hours and Justification:
 
-(placeholder)
+https://docs.google.com/document/d/1520szf9RahhbG3b3JX_KoLAYu-xyNTCL-ZjcUHBHnH0/edit?usp=sharing
 
 ## Budget
 There were no expenses. This was programmed using Python, TkInter, and Visual Studio Code and was managed using GitHub -- all of these technologies are free.
@@ -82,3 +82,15 @@ https://www.tutorialspoint.com/python/tk_colors.htm
 
 
 https://docs.python.org/3/library/tk.html
+
+
+https://www.thonky.com/sudoku/naked-pairs-triples-quads
+
+
+https://sudoku.com/
+
+
+https://www.nytimes.com/puzzles/sudoku
+
+
+https://www.conceptispuzzles.com/index.aspx?uri=puzzle/sudoku/techniques
