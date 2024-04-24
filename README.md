@@ -53,6 +53,14 @@ https://docs.google.com/document/d/1520szf9RahhbG3b3JX_KoLAYu-xyNTCL-ZjcUHBHnH0/
 ## Budget
 There were no expenses. This was programmed using Python, TkInter, and Visual Studio Code and was managed using GitHub -- all of these technologies are free.
 
+## FAQ
+### Will this work on all Operating Systems?
+Yes, this will work on Windows, Linux, and Mac!
+
+
+### Why use this instead of other Sudoku Solver implementations?
+This has the distinction of using human-solvable algorithms instead of relying on computer-solvable algorithms such as backtracking.
+
 ## Appendix
 Repository Link:
 
