@@ -7,24 +7,20 @@ Team Members: Michael Lieu and Will Schreiner
 
 Project Advisor: Fred Annexstein
 
-## Abstract
-This project is centered around the design and development of a Sudoku Solver programmed entirely in Python. This involves the implementation 
-of a user-friendly GUI using TkInter tools that will allow the user to interact with the board and the implementation of functions containing 
-algorithms that will take inputs from the GUI, solve the board based on those inputs, and pass them to the GUI. The main distinction of this 
-project is the utilization of human-solvable algorithms as opposed to computer solvable algorithms, the latter of which rely on brute force 
-tactics while the human-solvable algorithms are more intuitive in nature.
+## Project Description and Abstract
+https://github.com/Will-Schr/sudoku_capstone/blob/main/CS-Senior-Design-I-Assignments/Project-Description.md
 
 ## User Interface Specification
 https://docs.google.com/document/d/1fIRKCttxAFfgcy85ahNtcByQR3PaE-dxtV5WL764etM/edit?usp=sharing
 
-## Test Plans
+## Test Plans and Results
 https://docs.google.com/document/d/1LpXO1jyptIQwR8FSYAhol1jXUDputRI-_KNOx745PqY/edit?usp=sharing
 
 ## User Manual
 https://github.com/Will-Schr/sudoku_capstone/blob/main/assignment_2/instructions.md
 
 ## Final Presentation Slides
-https://1drv.ms/p/s!As9NLsfDCBxjlyx3HvJgmCpSMDhO?e=Mub3w3
+https://1drv.ms/p/s!As9NLsfDCBxjmXxKD3S2wp48nsGy?e=z0iwgz
 
 ## Expo Poster
 https://1drv.ms/p/s!As9NLsfDCBxjly6JBZJSccfMGzDg?e=wvPGIK
