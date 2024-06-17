@@ -14,6 +14,9 @@ algorithms that will take inputs from the GUI, solve the board based on those in
 project is the utilization of human-solvable algorithms as opposed to computer solvable algorithms, the latter of which rely on brute force 
 tactics while the human-solvable algorithms are more intuitive in nature.
 
+## Project Description
+https://github.com/Will-Schr/sudoku_capstone/blob/main/assignments/Project-Description.md
+
 ## User Stories and Design Diagrams
 https://docs.google.com/document/d/1yM8j9oQuLddpmENXPrZAojS8kFkkqgJYsSnM_zWwP3o/edit?usp=sharing
 
